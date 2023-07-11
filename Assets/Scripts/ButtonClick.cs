@@ -42,5 +42,6 @@ public class ButtonClick : MonoBehaviour
     public void PlayTheBFM()
     {
         SceneManager.LoadScene(("Play BFM"));
+        
     }
 }
