@@ -854,7 +854,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: https://facelessresidence.s3.eu-north-1.amazonaws.com/FR_FINAL_CUT/FR_FINAL_CUT/HOME.mp4
+  m_Url: https://facelessresidence.s3.eu-north-1.amazonaws.com/FR_FINAL_CUT/FR_FINAL_CUT/PROCEED.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
