@@ -1171,7 +1171,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: https://facelessresidence.s3.eu-north-1.amazonaws.com/FR_FINAL_CUT/FR_FINAL_CUT/PAWELS+HOUSE.mp4
+  m_Url: https://player.vimeo.com/progressive_redirect/playback/845490305/rendition/1080p/file.mp4?loc=external&signature=d3f0b5fa668efc4e4d65c33198b3a29f3b2a901d4599e0e74b1b60a811582d79
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -1195,4 +1195,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RefToVideo: {fileID: 1711525238}
   RefToButton: {fileID: 1597169071}
-  buttonAppearTime: 29
+  buttonAppearTime: 27

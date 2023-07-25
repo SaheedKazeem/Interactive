@@ -1085,7 +1085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RefToVideo: {fileID: 1711525238}
   RefToButton: {fileID: 1289029655}
-  buttonAppearTime: 146
+  buttonAppearTime: 148
 --- !u!4 &1692393263
 Transform:
   m_ObjectHideFlags: 0
@@ -1159,7 +1159,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: https://facelessresidence.s3.eu-north-1.amazonaws.com/FR_FINAL_CUT/FR_FINAL_CUT/PAWELS+DOOR.mp4
+  m_Url: https://player.vimeo.com/progressive_redirect/playback/847577467/rendition/1080p/file.mp4?loc=external&signature=96728fafac9069dff6b94a2dd94ecb943c63132364a4b4fbefd0d3b514fdb568
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
