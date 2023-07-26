@@ -25,18 +25,33 @@ public class VideoController : MonoBehaviour
     {
         if (isPlaying)
         {
-            videoPlayer.Pause();
+            PauseVideo();
         }
         else
         {
-            videoPlayer.Play();
+            PlayVideo();
         }
+    }
 
-        isPlaying = !isPlaying;
+    public void PlayVideo()
+    {
+        videoPlayer.Play();
+        isPlaying = true;
+    }
+
+    public void PauseVideo()
+    {
+        videoPlayer.Pause();
+        isPlaying = false;
     }
 
     private void SpeedUp()
     {
         videoPlayer.playbackSpeed *= speedMultiplier;
+    }
+
+    public bool IsVideoPlaying()
+    {
+        return isPlaying;
     }
 }

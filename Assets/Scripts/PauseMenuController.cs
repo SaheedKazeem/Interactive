@@ -3,6 +3,14 @@ using UnityEngine;
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject menuCanvas;
+    private VideoController videoController;
+    private bool wasPlayingBeforeMenu;
+
+    private void Start()
+    {
+        videoController = FindObjectOfType<VideoController>();
+        menuCanvas.SetActive(false); // Ensure the menu is initially not active
+    }
 
     private void Update()
     {
@@ -14,19 +22,24 @@ public class PauseMenuController : MonoBehaviour
 
     private void ToggleMenu()
     {
-        menuCanvas.SetActive(!menuCanvas.activeSelf);
+        bool isMenuActive = menuCanvas.activeSelf;
+        menuCanvas.SetActive(!isMenuActive);
 
-        // Pause or resume the video when the menu is opened or closed
-        VideoController videoController = FindObjectOfType<VideoController>();
         if (videoController)
         {
-            if (menuCanvas.activeSelf)
+            if (isMenuActive)
             {
-                videoController.videoPlayer.Pause();
+                // Store whether the video was playing before opening the menu
+                wasPlayingBeforeMenu = videoController.IsVideoPlaying();
+                videoController.PauseVideo();
             }
-            else if (videoController.isPlaying)
+            else
             {
-                videoController.videoPlayer.Play();
+                // Resume video playback if it was playing before opening the menu
+                if (wasPlayingBeforeMenu)
+                {
+                    videoController.PlayVideo();
+                }
             }
         }
     }

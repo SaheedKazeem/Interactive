@@ -170,7 +170,7 @@ namespace Vimeo
                 if (getDashUrl() != null) {
                     return getDashUrl();
                 }
-                Debug.LogWarning("[Vimeo] No DASH manfiest found. Defaulting to HLS.");
+                Debug.LogWarning("[Vimeo] No DASH manifest found. Defaulting to HLS.");
                 return getHlsUrl();
             }
         }
