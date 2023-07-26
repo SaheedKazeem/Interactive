@@ -5,10 +5,7 @@ using UnityEngine.Video;
 public class VideoController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-    public Button playButton;
-    public Button speedUpButton;
-
-    private bool isPlaying = false;
+    [SerializeField]private bool isPlaying = false;
     private float defaultPlaybackSpeed;
     private float speedMultiplier = 2.0f; // You can adjust this value to change the speed increase amount.
 
@@ -16,20 +13,21 @@ public class VideoController : MonoBehaviour
     {
         videoPlayer.playOnAwake = false;
         defaultPlaybackSpeed = videoPlayer.playbackSpeed;
-
-        playButton.onClick.AddListener(TogglePlay);
-        speedUpButton.onClick.AddListener(SpeedUp);
     }
 
-    private void TogglePlay()
+    private void Update()
     {
-        if (isPlaying)
+        // Check for the Escape key press to toggle video playback
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseVideo();
-        }
-        else
-        {
-            PlayVideo();
+            if (isPlaying)
+            {
+                PauseVideo();
+            }
+            else
+            {
+                PlayVideo();
+            }
         }
     }
 
@@ -45,7 +43,7 @@ public class VideoController : MonoBehaviour
         isPlaying = false;
     }
 
-    private void SpeedUp()
+    public void SpeedUp()
     {
         videoPlayer.playbackSpeed *= speedMultiplier;
     }
