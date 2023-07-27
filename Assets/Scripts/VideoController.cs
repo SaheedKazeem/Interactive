@@ -5,13 +5,13 @@ using UnityEngine.Video;
 public class VideoController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-    [SerializeField]private bool isPlaying = false;
+    [SerializeField] private bool isPlaying = false;
     private float defaultPlaybackSpeed;
     private float speedMultiplier = 2.0f; // You can adjust this value to change the speed increase amount.
 
     private void Start()
     {
-        videoPlayer.playOnAwake = false;
+        
         defaultPlaybackSpeed = videoPlayer.playbackSpeed;
     }
 
@@ -51,5 +51,17 @@ public class VideoController : MonoBehaviour
     public bool IsVideoPlaying()
     {
         return isPlaying;
+    }
+
+    // Method to get the current playback speed
+    public float GetPlaybackSpeed()
+    {
+        return videoPlayer.playbackSpeed;
+    }
+
+    // Method to set the playback speed
+    public void SetPlaybackSpeed(float speed)
+    {
+        videoPlayer.playbackSpeed = speed;
     }
 }
