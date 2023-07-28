@@ -549,8 +549,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 59.1}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 56.47902, y: 158.36899}
+  m_SizeDelta: {x: 899.661, y: 238.446}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &548042537
 MonoBehaviour:
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.75
+  m_fontSize: 197.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -711,10 +711,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1085,7 +1085,7 @@ RectTransform:
   m_GameObject: {fileID: 1294086641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4904871, y: 1.4904871, z: 1.4904871}
+  m_LocalScale: {x: 1.1611639, y: 1.1611639, z: 1.1611639}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 548042536}
@@ -1556,7 +1556,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: https://facelessresidence.s3.eu-north-1.amazonaws.com/FR_FINAL_CUT/FR_FINAL_CUT/RANDOM+DOOR.mp4
+  m_Url: https://player.vimeo.com/progressive_redirect/playback/847577896/rendition/1080p/file.mp4?loc=external&signature=bf542bafe5aaeedd80186ef9025ca8aacdfa9a2da1ecb1b65280ccf96a1c818f
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -1593,7 +1593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608faab98ffd71f4bb3cc7afd06d2838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 0}
+  videoPlayer: {fileID: 1711525238}
   isPlaying: 1
 --- !u!1 &1923157732
 GameObject:
@@ -1767,8 +1767,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -26.8}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 56.48001, y: -251.28102}
+  m_SizeDelta: {x: 719.729, y: 95.378}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1959572836
 MonoBehaviour:
@@ -1782,7 +1782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9bd52f258ba99b4fba6e20243052fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoController: {fileID: 0}
+  videoController: {fileID: 1711525240}
   speedText: {fileID: 1988729216}
 --- !u!114 &1959572837
 MonoBehaviour:
@@ -1900,7 +1900,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38
+  m_fontSize: 171.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1967,8 +1967,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -8.3}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 56.48001, y: -163.05602}
+  m_SizeDelta: {x: 899.661, y: 238.446}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2032324220
 GameObject:

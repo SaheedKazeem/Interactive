@@ -35,6 +35,10 @@ public class ButtonClick : MonoBehaviour
     {
         SceneManager.LoadScene(("Random Door"));
     }
+     public void ReturnHome()
+    {
+        SceneManager.LoadScene(("Home"));
+    }
     public void ReturnBackToPawel()
     {
         SceneManager.LoadScene(("Pawel's Door"));
@@ -42,6 +46,11 @@ public class ButtonClick : MonoBehaviour
     public void PlayTheBFM()
     {
         SceneManager.LoadScene(("Play BFM"));
+        
+    }
+    public void FaultyWiring()
+    {
+        SceneManager.LoadScene(("#Faulty Wiring"));
         
     }
 }
