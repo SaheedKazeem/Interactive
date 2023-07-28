@@ -38,4 +38,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Clips/Look at X-TC Disc.unity
     guid: 53b1a83b6a7ba2542b7704e3ab5e2868
+  - enabled: 1
+    path: Assets/Scenes/Clips/Kill Pawel.unity
+    guid: 5a6e0037c591b19409388baa91666090
+  - enabled: 1
+    path: Assets/Scenes/Clips/Play BFM No Pawel.unity
+    guid: 3ffd6667e63077b48ba23aa3dafc66ca
+  - enabled: 1
+    path: Assets/Scenes/Clips/What is BFM.unity
+    guid: a5863996a58dcf649b53c0db573859c5
+  - enabled: 1
+    path: Assets/Scenes/Clips/Beam me Up!.unity
+    guid: 8c4b4f20d12e3bc4fa4918dc0dd2f54c
+  - enabled: 1
+    path: Assets/Scenes/Clips/#Fear Smells.unity
+    guid: 85a52918be048ef438d23f30cd8feecb
   m_configObjects: {}

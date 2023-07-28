@@ -53,4 +53,14 @@ public class ButtonClick : MonoBehaviour
         SceneManager.LoadScene(("#Faulty Wiring"));
         
     }
+    public void PostMortem()
+    {
+        SceneManager.LoadScene(("#FearSmells"));
+        
+    }
+     public void BeamUp()
+    {
+        SceneManager.LoadScene(("Beam me Up!"));
+        
+    }
 }
