@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Clips/Restaurant.unity
+    guid: 8cec8075bb397ff4ab36e9c75be153e1
+  - enabled: 1
     path: Assets/Scenes/Clips/Home.unity
     guid: 2fae6badfef8d1c43a689df9c4bd3a18
   - enabled: 1
