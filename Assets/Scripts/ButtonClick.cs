@@ -58,9 +58,14 @@ public class ButtonClick : MonoBehaviour
         SceneManager.LoadScene(("#FearSmells"));
         
     }
-     public void BeamUp()
+    public void BeamUp()
     {
         SceneManager.LoadScene(("Beam me Up!"));
+        
+    }
+    public void SmokeUp()
+    {
+        SceneManager.LoadScene(("Smoke"));
         
     }
 }
