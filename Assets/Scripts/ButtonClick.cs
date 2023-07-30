@@ -31,6 +31,10 @@ public class ButtonClick : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+     public void GoBackVideo()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
      public void RandomDoors()
     {
         SceneManager.LoadScene(("Random Door"));
@@ -48,9 +52,14 @@ public class ButtonClick : MonoBehaviour
         SceneManager.LoadScene(("Play BFM"));
         
     }
-    public void FaultyWiring()
+      public void PlayXTC()
     {
-        SceneManager.LoadScene(("#Faulty Wiring"));
+        SceneManager.LoadScene(("Play XTC"));
+        
+    }
+    public void TapOut()
+    {
+        SceneManager.LoadScene(("Tap Out"));
         
     }
     public void PostMortem()
@@ -68,4 +77,20 @@ public class ButtonClick : MonoBehaviour
         SceneManager.LoadScene(("Smoke"));
         
     }
+     public void BusSpot()
+    {
+        SceneManager.LoadScene(("Bus"));
+        
+    }
+    public void StandUp()
+    {
+        SceneManager.LoadScene(("Stand Up"));
+        
+    }
+ public void Leave()
+    {
+        SceneManager.LoadScene(("Leave"));
+        
+    }
+
 }

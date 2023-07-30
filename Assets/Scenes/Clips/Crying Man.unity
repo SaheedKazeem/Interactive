@@ -1900,7 +1900,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1711525239}
         m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: NextVideo
+        m_MethodName: BusSpot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

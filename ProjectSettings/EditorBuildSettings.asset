@@ -33,14 +33,23 @@ EditorBuildSettings:
     path: Assets/Scenes/Clips/Proceed.unity
     guid: 302913f6a58d2b642a1b6a2d797cd870
   - enabled: 1
+    path: Assets/Scenes/Clips/Halt the Linearity.unity
+    guid: 6d3033168cb0f0e40b2e74ef16263577
+  - enabled: 1
     path: Assets/Scenes/Clips/#Bona Fide Masochist.unity
     guid: 363b430c0c2e3784d8f56d702dca8da2
+  - enabled: 1
+    path: Assets/Scenes/Clips/Tap Out.unity
+    guid: 658dbf70074f82d47a52fdffa889ffdf
   - enabled: 1
     path: Assets/Scenes/Clips/#Faulty Wiring.unity
     guid: 40bbf2e816d7039439f57f2cbb35cf54
   - enabled: 1
     path: Assets/Scenes/Clips/Smoke.unity
     guid: 145857e72ac14a84f950bdcc7cd3f17e
+  - enabled: 1
+    path: Assets/Scenes/Clips/Crying Man.unity
+    guid: 5a10c06bebd1e4148b33e2900986a4c0
   - enabled: 1
     path: Assets/Scenes/Clips/Random Door.unity
     guid: 306f9f345e2078343af541257a7c723e
@@ -65,4 +74,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Clips/#Fear Smells.unity
     guid: 85a52918be048ef438d23f30cd8feecb
+  - enabled: 1
+    path: Assets/Scenes/Clips/Play XTC.unity
+    guid: f732a623b83783e49810e1d543368b76
+  - enabled: 1
+    path: Assets/Scenes/Clips/#JBAM.unity
+    guid: c317d5b251bf4b840bae5eb22142ba48
+  - enabled: 1
+    path: Assets/Scenes/Clips/Leave.unity
+    guid: 356d5645de60ff948a4139ad1d882503
+  - enabled: 1
+    path: Assets/Scenes/Clips/Train Station.unity
+    guid: cc0ff3e64dd6aad44b0c0a3edf88d0a3
   m_configObjects: {}

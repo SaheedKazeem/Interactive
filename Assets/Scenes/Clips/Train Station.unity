@@ -610,7 +610,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1711525239}
         m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: PlayXTC
+        m_MethodName: StandUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RefToVideo: {fileID: 1711525238}
   RefToButton: {fileID: 307092804}
-  buttonAppearTime: 86
+  buttonAppearTime: 220
 --- !u!4 &992273999
 Transform:
   m_ObjectHideFlags: 0
@@ -2007,7 +2007,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: https://player.vimeo.com/progressive_redirect/playback/845490613/rendition/1080p/file.mp4?loc=external&signature=ed22cee9cfb59d32664fb6b5bc05f8bea934883c774a361fd6091c86b2ecac62
+  m_Url: https://player.vimeo.com/progressive_redirect/playback/845491716/rendition/1080p/file.mp4?loc=external&signature=34d21dabea020be1d5477854b1f6b0028123a82bf2ece49337f7977da78e346b
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RefToVideo: {fileID: 1711525238}
   RefToButton: {fileID: 1597169071}
-  buttonAppearTime: 84
+  buttonAppearTime: 217
 --- !u!114 &1711525240
 MonoBehaviour:
   m_ObjectHideFlags: 0
