@@ -87,10 +87,40 @@ public class ButtonClick : MonoBehaviour
         SceneManager.LoadScene(("Stand Up"));
         
     }
- public void Leave()
+     public void FGod()
+    {
+        SceneManager.LoadScene(("Fucking God"));
+        
+    }
+     public void Eyes()
+    {
+        SceneManager.LoadScene(("Eyes"));
+        
+    }
+    public void Scent()
+    {
+        SceneManager.LoadScene(("Scent"));
+        
+    }
+    public void NewConvo()
+    {
+        SceneManager.LoadScene(("New Convo"));
+        
+    }
+    public void Leave()
     {
         SceneManager.LoadScene(("Leave"));
-        
+
+    }
+    public void TodayIsDay()
+    {
+        SceneManager.LoadScene(("Today is the Day"));
+
+    }
+    public void WDYM()
+    {
+        SceneManager.LoadScene(("WDYM"));
+
     }
 
 }

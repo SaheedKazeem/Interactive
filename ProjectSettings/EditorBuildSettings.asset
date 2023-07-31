@@ -81,6 +81,30 @@ EditorBuildSettings:
     path: Assets/Scenes/Clips/#JBAM.unity
     guid: c317d5b251bf4b840bae5eb22142ba48
   - enabled: 1
+    path: Assets/Scenes/Clips/Eyes.unity
+    guid: 7162e48a4a829fb44905a774bfa51c01
+  - enabled: 1
+    path: Assets/Scenes/Clips/Scent.unity
+    guid: e47e313e9f5d5244fb548745af20ff12
+  - enabled: 1
+    path: Assets/Scenes/Clips/Stand Up.unity
+    guid: bef3a1a6ac140d140b40e8c0c309f38b
+  - enabled: 1
+    path: Assets/Scenes/Clips/Fucking God.unity
+    guid: 08e8e9e26bf7f6f4bb91cdcb112da94c
+  - enabled: 1
+    path: Assets/Scenes/Clips/New Convo.unity
+    guid: 0330d750150155b4c97dcd4f90d260a1
+  - enabled: 1
+    path: Assets/Scenes/Clips/Go Home.unity
+    guid: d76666b138a3a224babd7c816d13b808
+  - enabled: 1
+    path: Assets/Scenes/Clips/Today is the Day.unity
+    guid: 3d15b806893f3904daba5d3ba63358fd
+  - enabled: 1
+    path: Assets/Scenes/Clips/#Shallow Graved Individualist.unity
+    guid: 19f96c4dfd875354f9e279a42fb1ce18
+  - enabled: 1
     path: Assets/Scenes/Clips/Leave.unity
     guid: 356d5645de60ff948a4139ad1d882503
   - enabled: 1
@@ -89,4 +113,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Clips/Constant.unity
     guid: f9b2011a814c6694d8ca505254291a0e
+  - enabled: 1
+    path: Assets/Scenes/Clips/Category.unity
+    guid: e17f701a0cc74d24a8b8dffb3fa2493f
+  - enabled: 1
+    path: Assets/Scenes/Clips/Graveyard.unity
+    guid: 0fbc8d110e3a18549af32cc6e5c268a5
+  - enabled: 1
+    path: Assets/Scenes/Clips/Keep Listening.unity
+    guid: 8d8b1c8645e89354fbea9479511de458
   m_configObjects: {}
