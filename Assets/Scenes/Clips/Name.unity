@@ -561,7 +561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1437, y: 113}
+  m_AnchoredPosition: {x: -1563, y: 98}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307092806
@@ -1900,7 +1900,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1711525239}
         m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: NextVideo
+        m_MethodName: BusSpot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

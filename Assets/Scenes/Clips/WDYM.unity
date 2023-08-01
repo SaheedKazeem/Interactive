@@ -610,7 +610,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1711525239}
         m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: NextVideo
+        m_MethodName: TakeOffVeil
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RefToVideo: {fileID: 1711525238}
   RefToButton: {fileID: 307092804}
-  buttonAppearTime: 32
+  buttonAppearTime: 205
 --- !u!4 &992273999
 Transform:
   m_ObjectHideFlags: 0
@@ -1851,7 +1851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -331, y: 94}
+  m_AnchoredPosition: {x: -479, y: 113}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597169073
@@ -1900,7 +1900,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1711525239}
         m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: Name
+        m_MethodName: NextVideo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2007,7 +2007,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: https://player.vimeo.com/progressive_redirect/playback/847577395/rendition/1080p/file.mp4?loc=external&signature=2b42d71c23cc8ee0db6d22e0b095d481540e10cb7b726ef3442fa19ee6509d59
+  m_Url: https://player.vimeo.com/progressive_redirect/playback/845491946/rendition/1080p/file.mp4?loc=external&signature=fcbebec1ade5a0ecabe30fb547b550a76c55e9bb4d915806525e4665abf8dfe9
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RefToVideo: {fileID: 1711525238}
   RefToButton: {fileID: 1597169071}
-  buttonAppearTime: 29
+  buttonAppearTime: 208
 --- !u!114 &1711525240
 MonoBehaviour:
   m_ObjectHideFlags: 0

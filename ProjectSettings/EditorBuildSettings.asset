@@ -51,6 +51,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Clips/Crying Man.unity
     guid: 5a10c06bebd1e4148b33e2900986a4c0
   - enabled: 1
+    path: Assets/Scenes/Clips/Name.unity
+    guid: faecd870fe0183247b838d33171b0565
+  - enabled: 1
     path: Assets/Scenes/Clips/Random Door.unity
     guid: 306f9f345e2078343af541257a7c723e
   - enabled: 1
@@ -122,4 +125,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Clips/Keep Listening.unity
     guid: 8d8b1c8645e89354fbea9479511de458
+  - enabled: 1
+    path: Assets/Scenes/Clips/#Limbo.unity
+    guid: e8b2634513e94d84c9077806a4456a47
+  - enabled: 1
+    path: Assets/Scenes/Clips/WDYM.unity
+    guid: 1aac511fa32d4c44db66df7d2114c7ff
+  - enabled: 1
+    path: Assets/Scenes/Clips/Return to Stability.unity
+    guid: 6ed7423df11ff1d4980f5810fea02eae
+  - enabled: 1
+    path: Assets/Scenes/Clips/Take Off Veil.unity
+    guid: 33b32258a5ee9114ab6b7b4293611e7c
+  - enabled: 1
+    path: Assets/Scenes/Clips/Gateway.unity
+    guid: c2209305989aa204481659d86dbc9103
+  - enabled: 1
+    path: Assets/Scenes/Clips/#Ill Fated Existentialist.unity
+    guid: 85a036eee0ca7bf4a9a5b13a16af0374
   m_configObjects: {}

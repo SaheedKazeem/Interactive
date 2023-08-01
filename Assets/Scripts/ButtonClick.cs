@@ -122,5 +122,15 @@ public class ButtonClick : MonoBehaviour
         SceneManager.LoadScene(("WDYM"));
 
     }
+     public void TakeOffVeil()
+    {
+        SceneManager.LoadScene(("Take Off Veil"));
+
+    }
+       public void Name()
+    {
+        SceneManager.LoadScene(("Name"));
+
+    }
 
 }
