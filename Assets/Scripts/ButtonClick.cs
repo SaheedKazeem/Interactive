@@ -54,6 +54,11 @@ public class ButtonClick : MonoBehaviour
     }
       public void PlayXTC()
     {
+        SceneManager.LoadScene(("Look at X-TC Disc"));
+        
+    }
+      public void LookXTC()
+    {
         SceneManager.LoadScene(("Play XTC"));
         
     }
