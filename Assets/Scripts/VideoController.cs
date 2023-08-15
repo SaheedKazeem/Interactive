@@ -11,7 +11,7 @@ public class VideoController : MonoBehaviour
 
     private void Start()
     {
-        
+
         defaultPlaybackSpeed = videoPlayer.playbackSpeed;
     }
 
@@ -28,6 +28,23 @@ public class VideoController : MonoBehaviour
             {
                 PlayVideo();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            Screen.fullScreen = true;
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+
         }
     }
 
