@@ -9,7 +9,7 @@ public class SpeedSliderController : MonoBehaviour
     private Slider slider;
 
     private void Start()
-    {
+    {   videoController = GameObject.Find("Video").GetComponent<VideoController>();
         slider = GetComponent<Slider>();
         slider.onValueChanged.AddListener(OnSliderValueChanged);
         UpdateSpeedText(videoController.GetPlaybackSpeed());

@@ -252,7 +252,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 2
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1249,10 +1249,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 81835641613235972, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1133.275
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235972, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 386.304
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235972, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235972, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235972, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235972, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235972, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235972, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 168
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235973, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_fontSize
+      value: 207.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235973, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 264.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835641613235973, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 81835642212939845, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: videoController
       value: 
       objectReference: {fileID: 1711525240}
+    - target: {fileID: 81835642236754257, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835642236754257, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835642236754258, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 81835642236754259, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1340,6 +1396,18 @@ PrefabInstance:
     - target: {fileID: 81835642236754270, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835642657880105, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835642657880105, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81835642657880105, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 81835642862623328, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: m_Type

@@ -8,11 +8,13 @@ public class VideoController : MonoBehaviour
     [SerializeField] private bool isPlaying = false;
     private float defaultPlaybackSpeed;
     private float speedMultiplier = 2.0f; // You can adjust this value to change the speed increase amount.
+    
 
     private void Start()
     {
 
         defaultPlaybackSpeed = videoPlayer.playbackSpeed;
+        
     }
 
     private void Update()
@@ -36,15 +38,15 @@ public class VideoController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-
+            videoPlayer.time -= 5.0f;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-
+            videoPlayer.time += 5.0f;
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-
+            SkipToEnd();
         }
     }
 
@@ -81,4 +83,12 @@ public class VideoController : MonoBehaviour
     {
         videoPlayer.playbackSpeed = speed;
     }
+    private void SkipToEnd()
+    {
+        if (videoPlayer != null)
+        {
+            videoPlayer.time = videoPlayer.length - 4f;
+        }
+    }
+
 }
