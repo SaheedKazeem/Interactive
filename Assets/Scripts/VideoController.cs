@@ -87,7 +87,9 @@ public class VideoController : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            videoPlayer.time = videoPlayer.length - 4f;
+            videoPlayer.time = videoPlayer.length - 2f;
+            videoPlayer.Pause();
+            isPlaying = false;
         }
     }
 
