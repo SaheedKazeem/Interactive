@@ -14,6 +14,10 @@ public class SpeedSliderController : MonoBehaviour
         slider.onValueChanged.AddListener(OnSliderValueChanged);
         UpdateSpeedText(videoController.GetPlaybackSpeed());
     }
+    void Update()
+    {
+        videoController = FindObjectOfType<VideoController>();
+    }
 
     private void OnSliderValueChanged(float value)
     {

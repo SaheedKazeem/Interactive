@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
+    [SerializeField]private GameObject refToOptionsMenu; 
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,16 @@ public class MenuScript : MonoBehaviour
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+     public void OptionsMenu()
+     {
+        refToOptionsMenu.SetActive(true);
+     }
+     public void CloseOptionsMenu()
+     {
+        refToOptionsMenu.SetActive(false);
+     }
+     
+     
     // Update is called once per frame
     void Update()
     {

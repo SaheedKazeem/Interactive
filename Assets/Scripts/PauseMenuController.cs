@@ -8,12 +8,13 @@ public class PauseMenuController : MonoBehaviour
 
     private void Start()
     {
-        videoController = FindObjectOfType<VideoController>();
+        
         menuCanvas.SetActive(false); // Ensure the menu is initially not active
     }
 
     private void Update()
     {
+        videoController = FindObjectOfType<VideoController>();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleMenu();

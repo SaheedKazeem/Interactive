@@ -12,6 +12,7 @@ public class VideoController : MonoBehaviour
 
     private void Start()
     {
+        videoPlayer = FindObjectOfType<VideoPlayer>();
 
         defaultPlaybackSpeed = videoPlayer.playbackSpeed;
         
@@ -19,6 +20,10 @@ public class VideoController : MonoBehaviour
 
     private void Update()
     {
+        if (videoPlayer == null)
+        {
+            videoPlayer = FindObjectOfType<VideoPlayer>();
+        }
         // Check for the Escape key press to toggle video playback
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -81,7 +86,11 @@ public class VideoController : MonoBehaviour
     // Method to set the playback speed
     public void SetPlaybackSpeed(float speed)
     {
-        videoPlayer.playbackSpeed = speed;
+        if (videoPlayer != null)
+        {
+            videoPlayer.playbackSpeed = speed;
+        }
+        
     }
     private void SkipToEnd()
     {
