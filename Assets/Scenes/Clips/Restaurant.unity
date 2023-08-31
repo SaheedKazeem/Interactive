@@ -1222,10 +1222,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 348715316, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: videoPlayer
-      value: 
-      objectReference: {fileID: 1711525238}
     - target: {fileID: 952237235, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1246,10 +1242,6 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 81835642212939845, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: videoController
-      value: 
-      objectReference: {fileID: 1711525240}
     - target: {fileID: 81835642236754259, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1338,42 +1330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 81835642236754270, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 81835642862623343, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 81835642862623343, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 81835642862623343, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 81835643190158887, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 81835643190158887, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 588326199938827592, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: videoPlayer
       value: 
       objectReference: {fileID: 1711525238}
-    - target: {fileID: 2243110367116854642, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243110367116854642, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
-      propertyPath: m_MinValue
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4420249913357940569, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

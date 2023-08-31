@@ -1,20 +1,36 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject menuCanvas;
     private VideoController videoController;
     private bool wasPlayingBeforeMenu;
+    void Awake()
+    {
+       SceneManager.sceneLoaded += OnSceneLoaded; 
+    }
 
     private void Start()
     {
         
         menuCanvas.SetActive(false); // Ensure the menu is initially not active
+        
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        videoController = FindObjectOfType<VideoController>();
+       
+    }
+      private void OnDestroy()
+    {
+        // Unsubscribe from the sceneLoaded event to prevent memory leaks
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Update()
     {
-        videoController = FindObjectOfType<VideoController>();
+       
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleMenu();

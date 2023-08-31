@@ -69,7 +69,7 @@ public class ButtonClick : MonoBehaviour
     }
     public void PostMortem()
     {
-        SceneManager.LoadScene(("#FearSmells"));
+        SceneManager.LoadScene(("#Fear Smells"));
         
     }
     public void BeamUp()
@@ -137,5 +137,10 @@ public class ButtonClick : MonoBehaviour
         SceneManager.LoadScene(("Name"));
 
     }
+    public void ReturnToTrainStation()
+    {
+        SceneManager.LoadScene(("Train Station"));
+    }
+
 
 }

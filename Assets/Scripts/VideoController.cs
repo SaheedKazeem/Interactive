@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class VideoController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class VideoController : MonoBehaviour
     public GameObject rewindButton;
     public GameObject fastForwardButton;
     public GameObject skipButton;
+    public bool hasFBeenPressed;
 
     [SerializeField] private bool isPlaying = false;
     private float defaultPlaybackSpeed;
@@ -28,15 +30,23 @@ public class VideoController : MonoBehaviour
         fastForwardButton.SetActive(false);
         skipButton.SetActive(false);
 
+        // Subscribe to the sceneLoaded event
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        
+        if (videoPlayer == null)
+        {
+            videoPlayer = FindObjectOfType<VideoPlayer>();
+        }
+        else PlayVideo();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Update()
     {
 
-        if (videoPlayer == null)
-        {
-            videoPlayer = FindObjectOfType<VideoPlayer>();
-        }
         // Check for the Escape key press to toggle video playback
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -66,8 +76,14 @@ public class VideoController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
+            
+            hasFBeenPressed = true;
             SkipToEnd();
             ShowAndHideButton(skipButton);
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            hasFBeenPressed = false;
         }
     }
 
@@ -120,12 +136,19 @@ public class VideoController : MonoBehaviour
 
     private void SkipToEnd()
     {
+        videoPlayer.loopPointReached += EndReached;
         if (videoPlayer != null)
         {
             videoPlayer.time = videoPlayer.length - 4.25f;
-              StartCoroutine(VideoPauseWaitAFewSecs());
+            StartCoroutine(VideoPauseWaitAFewSecs());
         }
     }
+    void EndReached(VideoPlayer vp)
+{
+    PlayVideo();
+   videoPlayer.time = videoPlayer.length - 4.25f;
+   PauseVideo();
+}
     private void ShowAndHideButton(GameObject button)
     {
         StartCoroutine(ShowAndHideRoutine(button));
@@ -139,14 +162,14 @@ public class VideoController : MonoBehaviour
     }
     private IEnumerator VideoPauseWaitAFewSecs()
     {
-
+        SetPlaybackSpeed(1);
         yield return new WaitForSeconds(1.25f); // Adjust the duration as needed
         if (videoPlayer.isPrepared)
         {
-            videoPlayer.Pause();
-        isPlaying = false;
+            PauseVideo();
+            
         }
-        
+
     }
 
 }

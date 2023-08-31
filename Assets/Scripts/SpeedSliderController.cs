@@ -14,11 +14,13 @@ public class SpeedSliderController : MonoBehaviour
         slider = GetComponent<Slider>();
         slider.onValueChanged.AddListener(OnSliderValueChanged);
         UpdateSpeedText(videoController.GetPlaybackSpeed());
+        
     }
 
     void Update()
     {
         videoController = FindObjectOfType<VideoController>();
+         UpdateSpeedText(videoController.GetPlaybackSpeed());
     }
 
     private void OnSliderValueChanged(float value)
@@ -34,6 +36,7 @@ public class SpeedSliderController : MonoBehaviour
             {
                 videoController.SetAudioVolume(0);
                 speedwarningText.gameObject.SetActive(true);
+                
             }
             else
             {
