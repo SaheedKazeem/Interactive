@@ -778,7 +778,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -998, y: 113}
+  m_AnchoredPosition: {x: -1072, y: 113}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597169073
@@ -1051,6 +1051,7 @@ MonoBehaviour:
   rewindButton: {fileID: 1925746784}
   fastForwardButton: {fileID: 319145656}
   skipButton: {fileID: 1640122139}
+  hasFBeenPressed: 0
   isPlaying: 1
 --- !u!1 &1925746784
 GameObject:

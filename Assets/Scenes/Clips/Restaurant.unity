@@ -341,7 +341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1437, y: 113}
+  m_AnchoredPosition: {x: -1553, y: 113}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307092806
@@ -1214,6 +1214,7 @@ MonoBehaviour:
   rewindButton: {fileID: 0}
   fastForwardButton: {fileID: 0}
   skipButton: {fileID: 0}
+  hasFBeenPressed: 0
   isPlaying: 1
 --- !u!1001 &81835642306435848
 PrefabInstance:
@@ -1330,10 +1331,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 81835642236754270, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 588326199938827592, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: videoPlayer
       value: 
-      objectReference: {fileID: 1711525238}
+      objectReference: {fileID: 0}
     - target: {fileID: 4420249913357940569, guid: b3ec02b3099c07048aa2546afcc4ab7a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
