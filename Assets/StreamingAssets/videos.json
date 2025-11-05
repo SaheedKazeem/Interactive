@@ -6,20 +6,51 @@
   "barHeightPct": 0.08,
   "barTween": 0.35,
   "scenes": [
-    {
-      "name": "Home",
-      "windowsLocalPath": "C:/Videos/Home.mp4",
-      "buttons": [
-        { "name": "NextButton", "appearTime": 12.5, "targetScene": "Play BFM", "hideAfterSeconds": -1, "hotkey": "Alpha1", "pulse": true }
-      ]
-    },
-    {
-      "name": "Play BFM",
-      "windowsLocalPath": "C:/Videos/Season1.mp4",
-      "buttons": [
-        { "name": "ChoiceA", "appearTime": 30.0, "targetScene": "Pawel's Door", "hideAfterSeconds": 0, "hotkey": "Alpha1", "pulse": true },
-        { "name": "ChoiceB", "appearTime": 45.0, "targetScene": "Random Door", "hideAfterSeconds": 0, "hotkey": "Alpha2", "pulse": true }
-      ]
-    }
+    { "name": "#Bona Fide Masochist", "windowsLocalPath": "", "buttons": [] },
+    { "name": "#Faulty Wiring", "windowsLocalPath": "", "buttons": [] },
+    { "name": "#Fear Smells", "windowsLocalPath": "", "buttons": [] },
+    { "name": "#Ill Fated Existentialist", "windowsLocalPath": "", "buttons": [] },
+    { "name": "#JBAM", "windowsLocalPath": "", "buttons": [] },
+    { "name": "#Limbo", "windowsLocalPath": "", "buttons": [] },
+    { "name": "#Shallow Graved Individualist", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Another Random Door", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Beam me Up!", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Bus", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Category", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Constant", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Crying Man", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Eyes", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Fucking God", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Gateway", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Go Home", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Graveyard", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Halt the Linearity", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Home", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Keep Listening", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Kill Pawel", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Leave", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Look at X-TC Disc", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Name", "windowsLocalPath": "", "buttons": [] },
+    { "name": "New Convo", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Pawel's Door", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Pawel's House", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Play BFM", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Play BFM No Pawel", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Play XTC", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Proceed", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Random Door", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Restaurant", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Return to Stability", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Scent", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Smoke", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Stand Up", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Start Menu", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Take Off Veil", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Tap Out", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Today is the Day", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Train Station", "windowsLocalPath": "", "buttons": [] },
+    { "name": "Use", "windowsLocalPath": "", "buttons": [] },
+    { "name": "WDYM", "windowsLocalPath": "", "buttons": [] },
+    { "name": "What is BFM", "windowsLocalPath": "", "buttons": [] }
   ]
 }
