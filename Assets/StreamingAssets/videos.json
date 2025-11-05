@@ -1,0 +1,25 @@
+{
+  "defaultSeekSeconds": 5.0,
+  "decisionSfxFile": "C:/EventMusic/SFX/decision_ping.wav",
+  "decisionSfxVolume": 0.8,
+  "enableBars": true,
+  "barHeightPct": 0.08,
+  "barTween": 0.35,
+  "scenes": [
+    {
+      "name": "Home",
+      "windowsLocalPath": "C:/Videos/Home.mp4",
+      "buttons": [
+        { "name": "NextButton", "appearTime": 12.5, "targetScene": "Play BFM", "hideAfterSeconds": -1, "hotkey": "Alpha1", "pulse": true }
+      ]
+    },
+    {
+      "name": "Play BFM",
+      "windowsLocalPath": "C:/Videos/Season1.mp4",
+      "buttons": [
+        { "name": "ChoiceA", "appearTime": 30.0, "targetScene": "Pawel's Door", "hideAfterSeconds": 0, "hotkey": "Alpha1", "pulse": true },
+        { "name": "ChoiceB", "appearTime": 45.0, "targetScene": "Random Door", "hideAfterSeconds": 0, "hotkey": "Alpha2", "pulse": true }
+      ]
+    }
+  ]
+}

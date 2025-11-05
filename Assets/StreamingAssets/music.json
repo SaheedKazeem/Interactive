@@ -1,0 +1,40 @@
+{
+  "scenes": [
+    {
+      "name": "Home",
+      "cues": [
+        {
+          "file": "C:/EventMusic/Ambient_Loop.mp3",
+          "startOnSceneLoad": true,
+          "volume": 0.5,
+          "fadeIn": 1.0,
+          "fadeOut": 0.8,
+          "loop": true
+        }
+      ]
+    },
+    {
+      "name": "Play BFM",
+      "cues": [
+        {
+          "file": "C:/EventMusic/Intro_Sting.wav",
+          "startAtVideoTime": 0.0,
+          "stopAtVideoTime": 8.0,
+          "volume": 0.9,
+          "fadeIn": 0.2,
+          "fadeOut": 0.2,
+          "loop": false
+        },
+        {
+          "file": "C:/EventMusic/BeatLoop.ogg",
+          "startAtVideoTime": 10.0,
+          "volume": 0.7,
+          "fadeIn": 1.0,
+          "fadeOut": 1.0,
+          "loop": true
+        }
+      ]
+    }
+  ]
+}
+

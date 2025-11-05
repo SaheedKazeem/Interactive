@@ -14,21 +14,35 @@ public class VideoController : MonoBehaviour
 
     [SerializeField] private bool isPlaying = false;
     private float defaultPlaybackSpeed;
-    private float speedMultiplier = 2.0f; // You can adjust this value to change the speed increase amount.
+    [SerializeField] private float speedMultiplier = 2.0f; // Multiplier for SpeedUp
+    [SerializeField] private float seekSeconds = 5.0f;       // Q/E seek amount
+    [SerializeField] private float skipFromEndSeconds = 4.25f; // Skip-to-end offset
 
 
 
     private void Start()
     {
-        videoPlayer = FindObjectOfType<VideoPlayer>();
+        if (videoPlayer == null)
+        {
+            videoPlayer = FindObjectOfType<VideoPlayer>();
+        }
 
-        defaultPlaybackSpeed = videoPlayer.playbackSpeed;
-        rewindButton = GameObject.Find("rewindButton");
-        fastForwardButton = GameObject.Find("fastForwardButton");
-        skipButton = GameObject.Find("skipButton");
-        rewindButton.SetActive(false);
-        fastForwardButton.SetActive(false);
-        skipButton.SetActive(false);
+        if (videoPlayer != null)
+        {
+            defaultPlaybackSpeed = videoPlayer.playbackSpeed;
+            // Ensure we don't double-subscribe
+            videoPlayer.loopPointReached -= EndReached;
+            videoPlayer.loopPointReached += EndReached;
+        }
+
+        // Try to resolve UI references if not wired in Inspector
+        if (rewindButton == null) rewindButton = GameObject.Find("rewindButton");
+        if (fastForwardButton == null) fastForwardButton = GameObject.Find("fastForwardButton");
+        if (skipButton == null) skipButton = GameObject.Find("skipButton");
+
+        if (rewindButton) rewindButton.SetActive(false);
+        if (fastForwardButton) fastForwardButton.SetActive(false);
+        if (skipButton) skipButton.SetActive(false);
 
         // Subscribe to the sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -40,7 +54,10 @@ public class VideoController : MonoBehaviour
         {
             videoPlayer = FindObjectOfType<VideoPlayer>();
         }
-        else PlayVideo();
+        else
+        {
+            PlayVideo();
+        }
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -61,18 +78,26 @@ public class VideoController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F11))
         {
-            Screen.fullScreen = true;
-            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+            // Toggle full screen
+            Screen.fullScreen = !Screen.fullScreen;
+            if (Screen.fullScreen)
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            videoPlayer.time -= 5.0f;
-            ShowAndHideButton(rewindButton);
+            if (videoPlayer != null)
+            {
+                videoPlayer.time = Mathf.Max(0f, (float)videoPlayer.time - seekSeconds);
+                ShowAndHideButton(rewindButton);
+            }
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            videoPlayer.time += 5.0f;
-            ShowAndHideButton(fastForwardButton);
+            if (videoPlayer != null)
+            {
+                videoPlayer.time += seekSeconds;
+                ShowAndHideButton(fastForwardButton);
+            }
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -89,19 +114,32 @@ public class VideoController : MonoBehaviour
 
     public void PlayVideo()
     {
-        videoPlayer.Play();
-        isPlaying = true;
+        if (videoPlayer != null)
+        {
+            if (!videoPlayer.isPrepared)
+            {
+                videoPlayer.Prepare();
+            }
+            videoPlayer.Play();
+            isPlaying = true;
+        }
     }
 
     public void PauseVideo()
     {
-        videoPlayer.Pause();
-        isPlaying = false;
+        if (videoPlayer != null)
+        {
+            videoPlayer.Pause();
+            isPlaying = false;
+        }
     }
 
     public void SpeedUp()
     {
-        videoPlayer.playbackSpeed *= speedMultiplier;
+        if (videoPlayer != null)
+        {
+            videoPlayer.playbackSpeed = Mathf.Clamp(videoPlayer.playbackSpeed * speedMultiplier, 0.1f, 4f);
+        }
     }
 
     public bool IsVideoPlaying()
@@ -112,7 +150,7 @@ public class VideoController : MonoBehaviour
     // Method to get the current playback speed
     public float GetPlaybackSpeed()
     {
-        return videoPlayer.playbackSpeed;
+        return videoPlayer != null ? videoPlayer.playbackSpeed : 1f;
     }
 
     // Method to set the playback speed
@@ -120,34 +158,48 @@ public class VideoController : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            videoPlayer.playbackSpeed = speed;
+            videoPlayer.playbackSpeed = Mathf.Clamp(speed, 0.1f, 4f);
         }
 
     }
     public void SetAudioVolume(float volume)
     {
-        videoPlayer.SetDirectAudioVolume(0, volume);
+        if (videoPlayer != null)
+        {
+            videoPlayer.SetDirectAudioVolume(0, Mathf.Clamp01(volume));
+        }
     }
     public void SetAudioVolumeSaved()
     {
         float savedVolume = PlayerPrefs.GetFloat("VideoVolume", 1.0f);
-        videoPlayer.SetDirectAudioVolume(0, savedVolume);
+        if (videoPlayer != null)
+        {
+            videoPlayer.SetDirectAudioVolume(0, Mathf.Clamp01(savedVolume));
+        }
+    }
+
+    public void SetSeekSeconds(float seconds)
+    {
+        seekSeconds = Mathf.Max(0.1f, seconds);
     }
 
     private void SkipToEnd()
     {
-        videoPlayer.loopPointReached += EndReached;
         if (videoPlayer != null)
         {
-            videoPlayer.time = videoPlayer.length - 4.25f;
+            // Ensure single subscription
+            videoPlayer.loopPointReached -= EndReached;
+            videoPlayer.loopPointReached += EndReached;
+            videoPlayer.time = Mathf.Max(0f, (float)videoPlayer.length - skipFromEndSeconds);
             StartCoroutine(VideoPauseWaitAFewSecs());
         }
     }
     void EndReached(VideoPlayer vp)
 {
+    if (videoPlayer == null) return;
     PlayVideo();
-   videoPlayer.time = videoPlayer.length - 4.25f;
-   PauseVideo();
+    videoPlayer.time = Mathf.Max(0f, (float)videoPlayer.length - skipFromEndSeconds);
+    PauseVideo();
 }
     private void ShowAndHideButton(GameObject button)
     {
@@ -156,20 +208,30 @@ public class VideoController : MonoBehaviour
 
     private IEnumerator ShowAndHideRoutine(GameObject button)
     {
-        button.SetActive(true);
+        if (button)
+            button.SetActive(true);
         yield return new WaitForSeconds(0.5f); // Adjust the duration as needed
-        button.SetActive(false);
+        if (button)
+            button.SetActive(false);
     }
     private IEnumerator VideoPauseWaitAFewSecs()
     {
         SetPlaybackSpeed(1);
         yield return new WaitForSeconds(1.25f); // Adjust the duration as needed
-        if (videoPlayer.isPrepared)
+        if (videoPlayer != null && videoPlayer.isPrepared)
         {
             PauseVideo();
             
         }
 
+    }
+
+    private void OnDestroy()
+    {
+        if (videoPlayer != null)
+        {
+            videoPlayer.loopPointReached -= EndReached;
+        }
     }
 
 }

@@ -39,24 +39,24 @@ public class PauseMenuController : MonoBehaviour
 
     private void ToggleMenu()
     {
-        bool isMenuActive = menuCanvas.activeSelf;
-        menuCanvas.SetActive(!isMenuActive);
+        bool wasActive = menuCanvas.activeSelf;
+        bool opening = !wasActive; // if currently inactive, we are opening
+        menuCanvas.SetActive(!wasActive);
 
-        if (videoController)
+        if (!videoController) return;
+
+        if (opening)
         {
-            if (isMenuActive)
+            // Opening menu: pause and snapshot state
+            wasPlayingBeforeMenu = videoController.IsVideoPlaying();
+            videoController.PauseVideo();
+        }
+        else
+        {
+            // Closing menu: resume only if it was playing before
+            if (wasPlayingBeforeMenu)
             {
-                // Store whether the video was playing before opening the menu
-                wasPlayingBeforeMenu = videoController.IsVideoPlaying();
-                videoController.PauseVideo();
-            }
-            else
-            {
-                // Resume video playback if it was playing before opening the menu
-                if (wasPlayingBeforeMenu)
-                {
-                    videoController.PlayVideo();
-                }
+                videoController.PlayVideo();
             }
         }
     }
