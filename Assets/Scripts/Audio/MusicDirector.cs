@@ -28,6 +28,14 @@ namespace Interactive.Audio
         public float duckFade = 0.5f;
         private int activeMusicCount = 0; // number of currently audible music sources
         private float originalVideoVolume = 1f;
+        private bool isDucked = false;
+        private bool hasOriginalVideoVolume = false;
+
+        // Global playlist mode
+        private bool playlistMode = false;
+        private List<MusicCue> playlist;
+        private int playlistIndex = 0;
+        private AudioSource currentPlaylistSource;
 
         private class ScheduledCue
         {
@@ -54,6 +62,7 @@ namespace Interactive.Audio
             Instance = this;
             EnsureSources();
             LoadConfig();
+            // Per user request, default to per-scene cues only
         }
 
         private void EnsureSources()
@@ -62,11 +71,13 @@ namespace Interactive.Audio
             {
                 srcA = gameObject.AddComponent<AudioSource>();
                 srcA.loop = true; srcA.playOnAwake = false; srcA.volume = 0f;
+                srcA.ignoreListenerPause = true; srcA.pitch = 1f;
             }
             if (srcB == null)
             {
                 srcB = gameObject.AddComponent<AudioSource>();
                 srcB.loop = true; srcB.playOnAwake = false; srcB.volume = 0f;
+                srcB.ignoreListenerPause = true; srcB.pitch = 1f;
             }
         }
 
@@ -92,6 +103,12 @@ namespace Interactive.Audio
 
         public void ApplyForScene(string sceneName, VideoPlayer video)
         {
+            // If using global playlist, ignore per-scene cues
+            if (playlistMode)
+            {
+                currentVideo = video; // still track for volume slider etc.
+                return;
+            }
             currentVideo = video;
             scheduled.Clear();
             KillTweens(srcA); KillTweens(srcB);
@@ -113,6 +130,19 @@ namespace Interactive.Audio
 
         private void Update()
         {
+            if (playlistMode)
+            {
+                // Nothing to do per-frame: advancement handled by coroutine
+                // But if ducking was somehow left on and no audio is playing, ensure we unduck
+                if (enableDucking && isDucked && !IsAnySourceAudible())
+                    TryDuckVideo(false, duckFade);
+                return;
+            }
+
+            // If ducking is active but no music is audible anymore (e.g., non-loop clip ended), unduck
+            if (enableDucking && isDucked && !IsAnySourceAudible())
+                TryDuckVideo(false, duckFade);
+
             if (currentVideo == null || !currentVideo.isPrepared) return;
             if (scheduled.Count == 0) return;
             double t = currentVideo.time;
@@ -133,8 +163,8 @@ namespace Interactive.Audio
         private System.Collections.IEnumerator StartCueRoutine(ScheduledCue s)
         {
             s.started = true;
-            var clipReq = LoadClipAsync(s.cue.file);
-            yield return clipReq;
+            var clipReq = new ClipRequest();
+            yield return StartCoroutine(LoadClipAsync(s.cue.file, clipReq));
             var clip = clipReq.Result;
             if (clip == null)
             {
@@ -151,7 +181,7 @@ namespace Interactive.Audio
 
             tgt.DOKill();
             float fadeInDur = Mathf.Max(0.05f, s.cue.fadeIn);
-            tgt.DOFade(Mathf.Clamp01(s.cue.volume), fadeInDur);
+            tgt.DOFade(Mathf.Clamp01(s.cue.volume), fadeInDur).SetUpdate(true);
 
             // If the other source is playing, fade it out
             var other = OtherSource(tgt);
@@ -169,7 +199,7 @@ namespace Interactive.Audio
         {
             if (src == null) return;
             src.DOKill();
-            src.DOFade(0f, Mathf.Max(0.05f, duration)).OnComplete(() =>
+            src.DOFade(0f, Mathf.Max(0.05f, duration)).SetUpdate(true).OnComplete(() =>
             {
                 src.Stop();
                 src.clip = null;
@@ -193,9 +223,8 @@ namespace Interactive.Audio
             public AudioClip Result;
         }
 
-        private System.Collections.IEnumerator LoadClipAsync(string path)
+        private System.Collections.IEnumerator LoadClipAsync(string path, ClipRequest req)
         {
-            var req = new ClipRequest();
             if (string.IsNullOrWhiteSpace(path)) { yield break; }
 
             string url = ToUrl(path);
@@ -215,7 +244,7 @@ namespace Interactive.Audio
                 var clip = DownloadHandlerAudioClip.GetContent(uwr);
                 req.Result = clip;
             }
-            yield return req;
+            // nothing to return; result assigned to holder
         }
 
         private static AudioType GuessAudioType(string url)
@@ -237,6 +266,95 @@ namespace Interactive.Audio
             return $"file:///{abs}";
         }
 
+        private void TryStartGlobalPlaylist()
+        {
+            // Prefer explicit playlist field
+            if (config != null && config.playlist != null && config.playlist.Count > 0)
+            {
+                playlistMode = true;
+                playlist = new List<MusicCue>(config.playlist);
+            }
+            else
+            {
+                // Fallback: scene named _GLOBAL_ or _PLAYLIST_
+                var sc = config?.scenes?.Find(s => string.Equals(s.name, "_GLOBAL_", StringComparison.OrdinalIgnoreCase)
+                                                 || string.Equals(s.name, "_PLAYLIST_", StringComparison.OrdinalIgnoreCase));
+                if (sc != null && sc.cues != null && sc.cues.Count > 0)
+                {
+                    playlistMode = true;
+                    playlist = new List<MusicCue>(sc.cues);
+                }
+            }
+
+            if (!playlistMode || playlist == null || playlist.Count == 0)
+                return;
+
+            // In playlist mode, don't duck video audio and don't schedule per-scene cues
+            enableDucking = false;
+            scheduled.Clear();
+            playlistIndex = 0;
+            _ = StartCoroutine(StartPlaylistTrack(playlistIndex));
+        }
+
+        private System.Collections.IEnumerator StartPlaylistTrack(int index)
+        {
+            if (playlist == null || playlist.Count == 0) yield break;
+            index = ((index % playlist.Count) + playlist.Count) % playlist.Count;
+            var cue = playlist[index];
+
+            var clipReq = new ClipRequest();
+            yield return StartCoroutine(LoadClipAsync(cue.file, clipReq));
+            var clip = clipReq.Result;
+            if (clip == null)
+            {
+                Debug.LogWarning($"MusicDirector: failed to load playlist clip '{cue.file}'");
+                // Try next track
+                playlistIndex = (index + 1) % playlist.Count;
+                _ = StartCoroutine(StartPlaylistTrack(playlistIndex));
+                yield break;
+            }
+
+            var tgt = NextSource();
+            tgt.clip = clip;
+            tgt.loop = false; // sequential playlist, no per-track looping
+            tgt.volume = 0f;
+            tgt.pitch = 1f;
+            tgt.Play();
+            currentPlaylistSource = tgt;
+
+            float fadeInDur = Mathf.Max(0.05f, cue.fadeIn);
+            float fadeOutDur = Mathf.Max(0.05f, cue.fadeOut);
+            float targetVol = Mathf.Clamp01(cue.volume);
+            tgt.DOKill();
+            tgt.DOFade(targetVol, fadeInDur).SetUpdate(true);
+
+            // Crossfade with the other source if playing
+            var other = OtherSource(tgt);
+            if (other != null && other.isPlaying)
+            {
+                FadeOutAndStop(other, fadeOutDur);
+            }
+
+            // Schedule next track near end for overlap
+            _ = StartCoroutine(CoAdvancePlaylistOnEnd(tgt, fadeOutDur));
+        }
+
+        private System.Collections.IEnumerator CoAdvancePlaylistOnEnd(AudioSource src, float fadeOutDur)
+        {
+            if (src == null || src.clip == null) yield break;
+            // Wait until near the end, using unscaled time
+            double clipLen = src.clip.length;
+            double start = Time.unscaledTimeAsDouble;
+            double endAt = start + Mathf.Max(0f, (float)(clipLen - fadeOutDur));
+            while (Time.unscaledTimeAsDouble < endAt && src != null && src.isPlaying)
+                yield return null;
+
+            // Advance to next
+            if (playlist == null || playlist.Count == 0) yield break;
+            playlistIndex = (playlistIndex + 1) % playlist.Count;
+            _ = StartCoroutine(StartPlaylistTrack(playlistIndex));
+        }
+
         private void TryDuckVideo(bool duck, float duration)
         {
             if (!enableDucking || currentVideo == null) return;
@@ -246,16 +364,23 @@ namespace Interactive.Audio
             try
             {
                 // Snapshot original on first duck
-                if (duck && Mathf.Approximately(originalVideoVolume, 1f))
+                if (duck && !hasOriginalVideoVolume)
                 {
                     originalVideoVolume = currentVideo.GetDirectAudioVolume(0);
                     if (originalVideoVolume <= 0f) originalVideoVolume = 1f; // fallback
+                    hasOriginalVideoVolume = true;
                 }
             }
             catch { /* GetDirectAudioVolume not supported on some platforms */ }
 
             // Smoothly set volume
             StartCoroutine(CoTweenVideoVolume(target, dur));
+            isDucked = duck;
+            if (!duck)
+            {
+                // Reset snapshot so next duck re-reads source volume
+                hasOriginalVideoVolume = false;
+            }
         }
 
         private System.Collections.IEnumerator CoTweenVideoVolume(float target, float duration)
@@ -280,12 +405,17 @@ namespace Interactive.Audio
         {
             yield return new WaitForSecondsRealtime(delay);
             // Check if any source still audible
-            bool any = (srcA != null && srcA.isPlaying && srcA.volume > 0.01f) || (srcB != null && srcB.isPlaying && srcB.volume > 0.01f);
+            bool any = IsAnySourceAudible();
             if (!any)
             {
                 activeMusicCount = 0;
                 TryDuckVideo(false, duckFade);
             }
+        }
+
+        private bool IsAnySourceAudible()
+        {
+            return (srcA != null && srcA.isPlaying && srcA.volume > 0.01f) || (srcB != null && srcB.isPlaying && srcB.volume > 0.01f);
         }
     }
 }

@@ -13,8 +13,7 @@ public class VideoSourceResolver : MonoBehaviour
     [Tooltip("If true, uses the Windows local file path when running on Windows.")]
     public bool useWindowsLocalFile = true;
 
-    [Tooltip("Absolute path to the video file on Windows (e.g. C:/Videos/Season1.mp4). Supports 
-file:/// prefix or raw Windows path.")]
+    [Tooltip("Absolute path to the video file on Windows (e.g. C:/Videos/Season1.mp4). Supports file:/// prefix or raw Windows path.")]
     public string windowsLocalPath = string.Empty;
 
     [Tooltip("Auto play the video after switching source.")]

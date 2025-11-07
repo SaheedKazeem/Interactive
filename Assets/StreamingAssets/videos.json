@@ -1,56 +1,1389 @@
 {
-  "defaultSeekSeconds": 5.0,
-  "decisionSfxFile": "C:/EventMusic/SFX/decision_ping.wav",
-  "decisionSfxVolume": 0.8,
-  "enableBars": true,
-  "barHeightPct": 0.08,
-  "barTween": 0.35,
-  "scenes": [
-    { "name": "#Bona Fide Masochist", "windowsLocalPath": "", "buttons": [] },
-    { "name": "#Faulty Wiring", "windowsLocalPath": "", "buttons": [] },
-    { "name": "#Fear Smells", "windowsLocalPath": "", "buttons": [] },
-    { "name": "#Ill Fated Existentialist", "windowsLocalPath": "", "buttons": [] },
-    { "name": "#JBAM", "windowsLocalPath": "", "buttons": [] },
-    { "name": "#Limbo", "windowsLocalPath": "", "buttons": [] },
-    { "name": "#Shallow Graved Individualist", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Another Random Door", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Beam me Up!", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Bus", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Category", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Constant", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Crying Man", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Eyes", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Fucking God", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Gateway", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Go Home", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Graveyard", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Halt the Linearity", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Home", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Keep Listening", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Kill Pawel", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Leave", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Look at X-TC Disc", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Name", "windowsLocalPath": "", "buttons": [] },
-    { "name": "New Convo", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Pawel's Door", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Pawel's House", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Play BFM", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Play BFM No Pawel", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Play XTC", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Proceed", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Random Door", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Restaurant", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Return to Stability", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Scent", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Smoke", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Stand Up", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Start Menu", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Take Off Veil", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Tap Out", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Today is the Day", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Train Station", "windowsLocalPath": "", "buttons": [] },
-    { "name": "Use", "windowsLocalPath": "", "buttons": [] },
-    { "name": "WDYM", "windowsLocalPath": "", "buttons": [] },
-    { "name": "What is BFM", "windowsLocalPath": "", "buttons": [] }
-  ]
+    "defaultSeekSeconds": 5.0,
+    "scenes": [
+        {
+            "name": "#Bona Fide Masochist",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/BONA FIDE MASOCHIST.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 61.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "#Faulty Wiring",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/FAULTY WIRING_.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 120.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "#Fear Smells",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/POST MORTEM PROTOCOL_.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 30.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "#Ill Fated Existentialist",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/ILL FATED EXISTENTIALIST_.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 169.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "#JBAM",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/JBAM.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 77.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "#Limbo",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/LIMBOS NEW GARDENER_.mp4",
+            "buttons": []
+        },
+        {
+            "name": "#Shallow Graved Individualist",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/SHALLOW GRAVE INDIVIDUALIST.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 36.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Another Random Door",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/ANOTHER RANDOM DOOR.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 98.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Beam me Up!",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/BEAM ME UP.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 26.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Bus",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/BUS.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 76.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Category",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/CATEGORY.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 90.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Constant",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/CONSTANT.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 90.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 93.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Crying Man",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/CRYING MAN.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 36.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 39.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Eyes",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/EYES.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 32.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (4)",
+                    "appearTime": 34.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Fucking God",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/FUCKING GOD.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 52.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (4)",
+                    "appearTime": 54.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 54.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Gateway",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/GATEWAY.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 58.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Go Home",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/GO HOME (TS).mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 42.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Graveyard",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/GRAVEYARD.mp4",
+            "buttons": [
+                {
+                    "name": "Button (3)",
+                    "appearTime": 109.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (2)",
+                    "appearTime": 112.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Halt the Linearity",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/HALT THE LINEARITY.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 35.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Home",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/HOME.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 124.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Keep Listening",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/KEEP LISTENING.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 235.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Kill Pawel",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/KILL PAWEL.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 84.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 86.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Leave",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/LEAVE.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 111.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Look at X-TC Disc",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/LOOK AT XTC DISC.mp4",
+            "buttons": [
+                {
+                    "name": "Button (3)",
+                    "appearTime": 75.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (2)",
+                    "appearTime": 78.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Name",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/NAME.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 40.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 43.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "New Convo",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/NEW CONVERSATION_.mp4",
+            "buttons": [
+                {
+                    "name": "Button (3)",
+                    "appearTime": 227.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (2)",
+                    "appearTime": 230.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Pawel's Door",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/PAWELS DOOR.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 145.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 148.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Pawel's House",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/PAWELS HOUSE.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 27.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 31.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Play BFM",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/PLAY BFM WITH PAWEL.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 297.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Play BFM No Pawel",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/PLAYBFMNOPAWEL.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 95.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 98.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Play XTC",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/PLAYXTC.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 48.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Proceed",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/PROCEED.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 155.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 158.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Random Door",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/RANDOM DOOR.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 72.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 75.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Restaurant",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/RESTAURANT.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 236.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 240.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Return to Stability",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/RETURN TO STABILITY.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 58.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Scent",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/SCENT.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 37.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (4)",
+                    "appearTime": 41.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Smoke",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/SMOKE.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 29.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 32.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Stand Up",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/STAND UP.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 23.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Start Menu",
+            "windowsLocalPath": "",
+            "buttons": []
+        },
+        {
+            "name": "Take Off Veil",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/TAKE OFF VEIL.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 113.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Tap Out",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/TAP OUT.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 54.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Today is the Day",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/TODAY IS THE DAY.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 28.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Train Station",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/TRAIN STATION.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 217.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 220.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "Use",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/Use.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 44.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (3)",
+                    "appearTime": 47.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "WDYM",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/WDYM.mp4",
+            "buttons": [
+                {
+                    "name": "Button (3)",
+                    "appearTime": 205.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                },
+                {
+                    "name": "Button (2)",
+                    "appearTime": 208.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        },
+        {
+            "name": "What is BFM",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/WHAT IS BFM.mp4",
+            "buttons": [
+                {
+                    "name": "Button (2)",
+                    "appearTime": 30.0,
+                    "targetScene": "",
+                    "hideAfterSeconds": -1.0,
+                    "spawnDynamically": false,
+                    "label": "",
+                    "anchorX": -1.0,
+                    "anchorY": -1.0,
+                    "offsetX": 0.0,
+                    "offsetY": 0.0,
+                    "hotkey": "",
+                    "fadeIn": 0.3499999940395355,
+                    "scaleFrom": 0.949999988079071,
+                    "pulse": false,
+                    "autoSelectAfter": -1.0
+                }
+            ]
+        }
+    ],
+    "decisionSfxFile": "",
+    "decisionSfxVolume": 0.800000011920929,
+    "enableBars": false,
+    "barHeightPct": 0.07999999821186066,
+    "barTween": 0.3499999940395355
 }

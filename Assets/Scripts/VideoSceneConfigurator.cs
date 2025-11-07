@@ -38,7 +38,7 @@ public class VideoSceneConfigurator : MonoBehaviour
     private void Awake()
     {
         if (videoPlayer == null)
-            videoPlayer = FindObjectOfType<VideoPlayer>();
+            videoPlayer = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
         if (resolver == null && videoPlayer != null)
             resolver = videoPlayer.GetComponent<VideoSourceResolver>();
 
@@ -92,7 +92,7 @@ public class VideoSceneConfigurator : MonoBehaviour
         }
 
         // Apply default seek seconds to VideoController, if present
-        var vc = FindObjectOfType<VideoController>();
+        var vc = Interactive.Util.SceneObjectFinder.FindFirst<VideoController>(true);
         if (vc != null)
         {
             var projectConfig = VideoSceneConfigLoader.Load();
@@ -111,6 +111,10 @@ public class VideoSceneConfigurator : MonoBehaviour
     public Button dynamicButtonPrefab;
 
     private bool barsShownThisScene;
+
+    [Header("Control Options")]
+    [Tooltip("If true, the configurator will hide/show existing scene buttons based on timings. If false, it keeps your buttons as-is and only triggers bars/SFX at the times.")]
+    public bool manageExistingButtons = false;
 
     private void SetupTimedButtons()
     {
@@ -169,7 +173,8 @@ public class VideoSceneConfigurator : MonoBehaviour
                     Debug.LogWarning($"VideoSceneConfigurator: GameObject '{cfg.name}' lacks a Button component.");
                     continue;
                 }
-                PrepareButtonForShow(go, btn);
+                if (manageExistingButtons)
+                    PrepareButtonForShow(go, btn);
                 WireButtonAction(btn, cfg.targetScene);
 
                 buttonStates[cfg.name] = new TimedButtonState
@@ -177,7 +182,7 @@ public class VideoSceneConfigurator : MonoBehaviour
                     cfg = cfg,
                     go = go,
                     button = btn,
-                    shown = false,
+                    shown = !manageExistingButtons && go.activeSelf, // respect current state if not managing
                     shownAt = 0f,
                     spawned = false
                 };
@@ -189,13 +194,17 @@ public class VideoSceneConfigurator : MonoBehaviour
 
     private static void WireButtonAction(Button btn, string target)
     {
+        // If target is empty, respect existing listeners set up in the scene.
+        if (string.IsNullOrEmpty(target)) return;
+
+        // Otherwise, we own the click and navigate to the configured scene.
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(() =>
         {
-            var bars = Object.FindObjectOfType<CinematicBars>();
+            var bars = Interactive.Util.SceneObjectFinder.FindFirst<CinematicBars>(true);
             if (bars != null) bars.Hide();
-            if (!string.IsNullOrEmpty(target))
-                SceneManager.LoadScene(target);
+            // Fade out then load for polish
+            SceneFader.FadeAndLoad(target, 0.35f);
         });
     }
 
@@ -220,22 +229,22 @@ public class VideoSceneConfigurator : MonoBehaviour
         foreach (var kv in buttonStates)
         {
             var state = kv.Value;
+            // If we are not managing existing buttons, just use timing to trigger global polish (bars/SFX) once.
+            if (!state.spawned && !manageExistingButtons)
+            {
+                if (!state.shown && t >= state.cfg.appearTime)
+                {
+                    TryTriggerBarsAndSfxOnce();
+                    state.shown = true;
+                    state.shownAt = (float)t;
+                }
+                continue;
+            }
             if (!state.shown && t >= state.cfg.appearTime)
             {
                 state.go.SetActive(true);
                 // Cinematic bars and decision SFX on first decision in scene
-                var projectConfig = VideoSceneConfigLoader.Load();
-                if (projectConfig != null && projectConfig.enableBars && !barsShownThisScene)
-                {
-                    barsShownThisScene = true;
-                    var bars = CinematicBars.Ensure();
-                    bars.Configure(projectConfig.barHeightPct, projectConfig.barTween);
-                    bars.Show();
-                }
-                if (projectConfig != null && !string.IsNullOrEmpty(projectConfig.decisionSfxFile))
-                {
-                    Interactive.Audio.SfxPlayer.Ensure().PlayOneShot(projectConfig.decisionSfxFile, projectConfig.decisionSfxVolume);
-                }
+                TryTriggerBarsAndSfxOnce();
                 // DOTween show animation
                 var cg = state.go.GetComponent<CanvasGroup>();
                 if (cg != null)
@@ -295,6 +304,22 @@ public class VideoSceneConfigurator : MonoBehaviour
         }
     }
 
+    private void TryTriggerBarsAndSfxOnce()
+    {
+        var projectConfig = VideoSceneConfigLoader.Load();
+        if (projectConfig != null && projectConfig.enableBars && !barsShownThisScene)
+        {
+            barsShownThisScene = true;
+            var bars = CinematicBars.Ensure();
+            bars.Configure(projectConfig.barHeightPct, projectConfig.barTween);
+            bars.Show();
+        }
+        if (projectConfig != null && !string.IsNullOrEmpty(projectConfig.decisionSfxFile))
+        {
+            Interactive.Audio.SfxPlayer.Ensure().PlayOneShot(projectConfig.decisionSfxFile, projectConfig.decisionSfxVolume);
+        }
+    }
+
     private System.Collections.IEnumerator AutoSelectAfter(TimedButtonState state, float afterSeconds)
     {
         float start = state.shownAt;
@@ -333,21 +358,21 @@ public class VideoSceneConfigurator : MonoBehaviour
         }
         return false;
     }
-}
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-// Minimal duplication of VideoSourceResolver.ToVideoUrl for fallback behavior.
-static string VideoSourceResolver_ToVideoUrl(string path)
-{
-    if (string.IsNullOrEmpty(path)) return path;
-    if (path.StartsWith("http://") || path.StartsWith("https://") || path.StartsWith("file:///"))
-        return path;
-    string normalized = path.Replace('\\', '/');
-    if (normalized.Length > 1 && normalized[1] == ':')
+    // Minimal duplication of VideoSourceResolver.ToVideoUrl for fallback behavior.
+    private static string VideoSourceResolver_ToVideoUrl(string path)
     {
-        return $"file:///{normalized}";
+        if (string.IsNullOrEmpty(path)) return path;
+        if (path.StartsWith("http://") || path.StartsWith("https://") || path.StartsWith("file:///"))
+            return path;
+        string normalized = path.Replace('\\', '/');
+        if (normalized.Length > 1 && normalized[1] == ':')
+        {
+            return $"file:///{normalized}";
+        }
+        string abs = System.IO.Path.GetFullPath(path).Replace('\\', '/');
+        return $"file:///{abs}";
     }
-    string abs = System.IO.Path.GetFullPath(path).Replace('\\', '/');
-    return $"file:///{abs}";
-}
 #endif
+}

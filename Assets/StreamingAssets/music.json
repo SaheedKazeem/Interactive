@@ -1,40 +1,363 @@
 {
-  "scenes": [
-    {
-      "name": "Home",
-      "cues": [
+    "scenes": [
         {
-          "file": "C:/EventMusic/Ambient_Loop.mp3",
-          "startOnSceneLoad": true,
-          "volume": 0.5,
-          "fadeIn": 1.0,
-          "fadeOut": 0.8,
-          "loop": true
-        }
-      ]
-    },
-    {
-      "name": "Play BFM",
-      "cues": [
-        {
-          "file": "C:/EventMusic/Intro_Sting.wav",
-          "startAtVideoTime": 0.0,
-          "stopAtVideoTime": 8.0,
-          "volume": 0.9,
-          "fadeIn": 0.2,
-          "fadeOut": 0.2,
-          "loop": false
+            "name": "#Bona Fide Masochist",
+            "cues": []
         },
         {
-          "file": "C:/EventMusic/BeatLoop.ogg",
-          "startAtVideoTime": 10.0,
-          "volume": 0.7,
-          "fadeIn": 1.0,
-          "fadeOut": 1.0,
-          "loop": true
+            "name": "#Faulty Wiring",
+            "cues": []
+        },
+        {
+            "name": "#Fear Smells",
+            "cues": []
+        },
+        {
+            "name": "#Ill Fated Existentialist",
+            "cues": []
+        },
+        {
+            "name": "#JBAM",
+            "cues": []
+        },
+        {
+            "name": "#Limbo",
+            "cues": []
+        },
+        {
+            "name": "#Shallow Graved Individualist",
+            "cues": []
+        },
+        {
+            "name": "Another Random Door",
+            "cues": []
+        },
+        {
+            "name": "Beam me Up!",
+            "cues": []
+        },
+        {
+            "name": "Bus",
+            "cues": []
+        },
+        {
+            "name": "Category",
+            "cues": []
+        },
+        {
+            "name": "Constant",
+            "cues": []
+        },
+        {
+            "name": "Crying Man",
+            "cues": []
+        },
+        {
+            "name": "Eyes",
+            "cues": []
+        },
+        {
+            "name": "Fucking God",
+            "cues": []
+        },
+        {
+            "name": "Gateway",
+            "cues": []
+        },
+        {
+            "name": "Go Home",
+            "cues": []
+        },
+        {
+            "name": "Graveyard",
+            "cues": []
+        },
+        {
+            "name": "Halt the Linearity",
+            "cues": []
+        },
+        {
+            "name": "Home",
+            "cues": []
+        },
+        {
+            "name": "Keep Listening",
+            "cues": []
+        },
+        {
+            "name": "Kill Pawel",
+            "cues": []
+        },
+        {
+            "name": "Leave",
+            "cues": []
+        },
+        {
+            "name": "Look at X-TC Disc",
+            "cues": []
+        },
+        {
+            "name": "Name",
+            "cues": []
+        },
+        {
+            "name": "New Convo",
+            "cues": []
+        },
+        {
+            "name": "Pawel's Door",
+            "cues": []
+        },
+        {
+            "name": "Pawel's House",
+            "cues": []
+        },
+        {
+            "name": "Play BFM",
+            "cues": []
+        },
+        {
+            "name": "Play BFM No Pawel",
+            "cues": []
+        },
+        {
+            "name": "Play XTC",
+            "cues": []
+        },
+        {
+            "name": "Proceed",
+            "cues": []
+        },
+        {
+            "name": "Random Door",
+            "cues": []
+        },
+        {
+            "name": "Restaurant",
+            "cues": []
+        },
+        {
+            "name": "Return to Stability",
+            "cues": []
+        },
+        {
+            "name": "Scent",
+            "cues": []
+        },
+        {
+            "name": "Smoke",
+            "cues": []
+        },
+        {
+            "name": "Stand Up",
+            "cues": []
+        },
+        {
+            "name": "Start Menu",
+            "cues": []
+        },
+        {
+            "name": "Take Off Veil",
+            "cues": []
+        },
+        {
+            "name": "Tap Out",
+            "cues": []
+        },
+        {
+            "name": "Today is the Day",
+            "cues": []
+        },
+        {
+            "name": "Train Station",
+            "cues": []
+        },
+        {
+            "name": "Use",
+            "cues": []
+        },
+        {
+            "name": "WDYM",
+            "cues": []
+        },
+        {
+            "name": "What is BFM",
+            "cues": []
+        },
+        {
+            "name": "_UNASSIGNED_",
+            "cues": [
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/And then some - Keko.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/BIG BIG DRANK - Ray Matix.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/Dungarees - EM.E.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/Enter the Void - Hunzo Phoenix, DIEGOWITHA3, Gillia.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/gone - siqtris.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/good2go - Keko.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/Gsm (No Safety) - Hunzo Phoenix.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/GYALYMPICS (feat. NJRGÉ) - Kelvin5star.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/HALF A MIL - New World Ray.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/hello - Kharis.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/L.A.P.D - New World Ray.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/LikeMySwag - Abz Stainless, STARA.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/Minaj - TyySzn.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/Pressure - Kharis.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/Run - Lztae.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/Salut - EM.E.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                },
+                {
+                    "file": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Music/2 year game music-20251104T125418Z-1-001/2 year game music/SMILEOUT - Kaio Sativa.mp3",
+                    "startOnSceneLoad": true,
+                    "startAtVideoTime": -1.0,
+                    "stopAtVideoTime": -1.0,
+                    "volume": 0.699999988079071,
+                    "fadeIn": 0.5,
+                    "fadeOut": 0.5,
+                    "loop": true
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
-

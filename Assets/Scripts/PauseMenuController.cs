@@ -19,7 +19,7 @@ public class PauseMenuController : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        videoController = FindObjectOfType<VideoController>();
+        videoController = Interactive.Util.SceneObjectFinder.FindFirst<VideoController>(true);
        
     }
       private void OnDestroy()

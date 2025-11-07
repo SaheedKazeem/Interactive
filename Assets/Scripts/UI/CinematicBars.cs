@@ -9,7 +9,7 @@ public class CinematicBars : MonoBehaviour
 {
     public static CinematicBars Ensure()
     {
-        var existing = FindObjectOfType<CinematicBars>();
+        var existing = Interactive.Util.SceneObjectFinder.FindFirst<CinematicBars>(true);
         if (existing != null) return existing;
         var go = new GameObject("~CinematicBars");
         DontDestroyOnLoad(go);
@@ -47,6 +47,8 @@ public class CinematicBars : MonoBehaviour
         go.transform.SetParent(transform, false);
         var img = go.AddComponent<Image>();
         img.color = Color.black;
+        // Do not block any UI beneath the bars
+        img.raycastTarget = false;
         var rt = go.GetComponent<RectTransform>();
         rt.anchorMin = new Vector2(0, 1);
         rt.anchorMax = new Vector2(1, 1);
@@ -99,4 +101,3 @@ public class CinematicBars : MonoBehaviour
         DOTween.To(() => heightPct, v => LayoutBars(v), 0f, Mathf.Max(0.05f, tween)).SetUpdate(true);
     }
 }
-

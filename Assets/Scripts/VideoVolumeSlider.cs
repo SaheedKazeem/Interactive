@@ -31,7 +31,7 @@ public class VideoVolumeSlider : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Find the VideoPlayer component
-        videoPlayer = FindObjectOfType<VideoPlayer>();
+        videoPlayer = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
 
         // Set the video player's volume based on the saved volume
         if (videoPlayer != null)

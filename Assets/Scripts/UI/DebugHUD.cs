@@ -27,8 +27,8 @@ public class DebugHUD : MonoBehaviour
     private void Awake()
     {
         Build();
-        SceneManager.sceneLoaded += (_, __) => vp = Object.FindObjectOfType<VideoPlayer>();
-        vp = FindObjectOfType<VideoPlayer>();
+        SceneManager.sceneLoaded += (_, __) => vp = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
+        vp = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
         SetVisible(false);
     }
 
@@ -82,4 +82,3 @@ public class DebugHUD : MonoBehaviour
         canvas.enabled = on;
     }
 }
-

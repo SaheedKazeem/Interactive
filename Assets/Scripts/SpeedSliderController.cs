@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SpeedSliderController : MonoBehaviour
 {
@@ -10,17 +11,38 @@ public class SpeedSliderController : MonoBehaviour
 
     private void Start()
     {
-        videoController = GameObject.Find("Video").GetComponent<VideoController>();
         slider = GetComponent<Slider>();
         slider.onValueChanged.AddListener(OnSliderValueChanged);
-        UpdateSpeedText(videoController.GetPlaybackSpeed());
-        
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        // Try to bind immediately if present in current scene
+        videoController = Interactive.Util.SceneObjectFinder.FindFirst<VideoController>(true);
+        if (videoController != null)
+        {
+            UpdateSpeedText(videoController.GetPlaybackSpeed());
+        }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        videoController = Interactive.Util.SceneObjectFinder.FindFirst<VideoController>(true);
+        if (videoController != null)
+        {
+            UpdateSpeedText(videoController.GetPlaybackSpeed());
+        }
     }
 
     void Update()
     {
-        videoController = FindObjectOfType<VideoController>();
-         UpdateSpeedText(videoController.GetPlaybackSpeed());
+        if (videoController != null)
+        {
+            UpdateSpeedText(videoController.GetPlaybackSpeed());
+        }
     }
 
     private void OnSliderValueChanged(float value)

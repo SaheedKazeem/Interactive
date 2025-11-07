@@ -7,6 +7,8 @@ namespace Interactive.Audio
     public class MusicProjectConfig
     {
         public List<SceneMusicConfig> scenes = new List<SceneMusicConfig>();
+        // Optional global playlist that plays across all scenes
+        public List<MusicCue> playlist = new List<MusicCue>();
     }
 
     [Serializable]
@@ -29,4 +31,3 @@ namespace Interactive.Audio
         public bool loop = true;
     }
 }
-

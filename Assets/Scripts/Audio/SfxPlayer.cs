@@ -51,7 +51,7 @@ namespace Interactive.Audio
 
         public static SfxPlayer Ensure()
         {
-            var existing = FindObjectOfType<SfxPlayer>();
+            var existing = Interactive.Util.SceneObjectFinder.FindFirst<SfxPlayer>(true);
             if (existing != null) return existing;
             var go = new GameObject("~SfxPlayer");
             return go.AddComponent<SfxPlayer>();
@@ -77,4 +77,3 @@ namespace Interactive.Audio
         }
     }
 }
-

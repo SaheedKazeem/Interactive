@@ -24,7 +24,7 @@ public class VideoController : MonoBehaviour
     {
         if (videoPlayer == null)
         {
-            videoPlayer = FindObjectOfType<VideoPlayer>();
+            videoPlayer = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
         }
 
         if (videoPlayer != null)
@@ -52,7 +52,7 @@ public class VideoController : MonoBehaviour
         
         if (videoPlayer == null)
         {
-            videoPlayer = FindObjectOfType<VideoPlayer>();
+            videoPlayer = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
         }
         else
         {

@@ -15,8 +15,9 @@ public class MenuScript : MonoBehaviour
 
     public void LoadScene()
     {
-        
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        int next = SceneManager.GetActiveScene().buildIndex + 1;
+        Debug.Log($"Start button clicked. Loading scene index {next}...");
+        SceneManager.LoadScene(next);
     }
      public void OptionsMenu()
      {
