@@ -1,8 +1,11 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Interactive.Config;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class VideoController : MonoBehaviour
 {
@@ -16,8 +19,12 @@ public class VideoController : MonoBehaviour
     private float defaultPlaybackSpeed;
     [SerializeField] private float speedMultiplier = 2.0f; // Multiplier for SpeedUp
     [SerializeField] private float seekSeconds = 5.0f;       // Q/E seek amount
-    [SerializeField] private float skipFromEndSeconds = 4.25f; // Skip-to-end offset
+    [SerializeField] private float skipFromEndSeconds = 4.25f; // Lead-in before decision when pausing
+    [SerializeField] private float decisionSnapEpsilon = 0.2f; // Seconds past a decision before we skip to the next
 
+    private readonly List<float> decisionTimes = new List<float>();
+    private string cachedSceneName;
+    private const double MinSeekTailSeconds = 0.05d;
 
 
     private void Start()
@@ -44,6 +51,8 @@ public class VideoController : MonoBehaviour
         if (fastForwardButton) fastForwardButton.SetActive(false);
         if (skipButton) skipButton.SetActive(false);
 
+        RefreshDecisionTimes(SceneManager.GetActiveScene().name);
+
         // Subscribe to the sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -58,24 +67,12 @@ public class VideoController : MonoBehaviour
         {
             PlayVideo();
         }
+        RefreshDecisionTimes(scene.name);
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Update()
     {
-
-        // Check for the Escape key press to toggle video playback
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPlaying)
-            {
-                PauseVideo();
-            }
-            else
-            {
-                PlayVideo();
-            }
-        }
         if (Input.GetKeyDown(KeyCode.F11))
         {
             // Toggle full screen
@@ -103,7 +100,7 @@ public class VideoController : MonoBehaviour
         {
             
             hasFBeenPressed = true;
-            SkipToEnd();
+            SkipToNextDecision();
             ShowAndHideButton(skipButton);
         }
         if (Input.GetKeyUp(KeyCode.F))
@@ -144,7 +141,7 @@ public class VideoController : MonoBehaviour
 
     public bool IsVideoPlaying()
     {
-        return isPlaying;
+        return videoPlayer != null && videoPlayer.isPlaying;
     }
 
     // Method to get the current playback speed
@@ -183,24 +180,123 @@ public class VideoController : MonoBehaviour
         seekSeconds = Mathf.Max(0.1f, seconds);
     }
 
-    private void SkipToEnd()
+    private void SkipToNextDecision()
     {
-        if (videoPlayer != null)
+        if (videoPlayer == null) return;
+        if (!videoPlayer.canSetTime) return;
+        if (!videoPlayer.isPrepared)
         {
-            // Ensure single subscription
-            videoPlayer.loopPointReached -= EndReached;
-            videoPlayer.loopPointReached += EndReached;
-            videoPlayer.time = Mathf.Max(0f, (float)videoPlayer.length - skipFromEndSeconds);
-            StartCoroutine(VideoPauseWaitAFewSecs());
+            videoPlayer.Prepare();
+            return;
+        }
+
+        // Ensure single subscription
+        videoPlayer.loopPointReached -= EndReached;
+        videoPlayer.loopPointReached += EndReached;
+
+        double currentTime = videoPlayer.time;
+        double? decisionTime = FindNextDecisionTime(currentTime);
+        if (decisionTime.HasValue)
+        {
+            double target = decisionTime.Value - skipFromEndSeconds;
+            SeekTo(target, keepPlaybackState: true);
+        }
+        else
+        {
+            // Fallback to legacy behaviour
+            double fallback = videoPlayer.length > 0d
+                ? Math.Max(0d, videoPlayer.length - skipFromEndSeconds)
+                : 0d;
+            SeekTo(fallback, keepPlaybackState: true);
         }
     }
+
+    private void RefreshDecisionTimes(string sceneName)
+    {
+        if (string.IsNullOrEmpty(sceneName)) return;
+        if (string.Equals(cachedSceneName, sceneName, StringComparison.OrdinalIgnoreCase))
+            return;
+
+        cachedSceneName = sceneName;
+        decisionTimes.Clear();
+
+        var projectConfig = VideoSceneConfigLoader.Load();
+        if (projectConfig?.scenes == null) return;
+        var sceneConfig = projectConfig.scenes.Find(s => string.Equals(s.name, sceneName, StringComparison.OrdinalIgnoreCase));
+        if (sceneConfig?.buttons == null || sceneConfig.buttons.Count == 0) return;
+
+        var uniqueTimes = new HashSet<float>();
+        foreach (var button in sceneConfig.buttons)
+        {
+            if (button == null) continue;
+            float t = Mathf.Max(0f, button.appearTime);
+            if (uniqueTimes.Add(t))
+            {
+                decisionTimes.Add(t);
+            }
+        }
+
+        decisionTimes.Sort();
+    }
+
+    private double? FindNextDecisionTime(double currentTime)
+    {
+        if (decisionTimes.Count == 0) return null;
+        foreach (var t in decisionTimes)
+        {
+            if (currentTime <= t + decisionSnapEpsilon)
+                return t;
+        }
+        return decisionTimes[decisionTimes.Count - 1];
+    }
+
+    private double? GetLastDecisionTime()
+    {
+        if (decisionTimes.Count == 0) return null;
+        return decisionTimes[decisionTimes.Count - 1];
+    }
+
+    private void SeekTo(double targetTime, bool keepPlaybackState)
+    {
+        if (videoPlayer == null) return;
+        if (!videoPlayer.canSetTime) return;
+
+        if (!videoPlayer.isPrepared)
+        {
+            videoPlayer.Prepare();
+            return;
+        }
+
+        double clipLength = videoPlayer.length;
+        if (clipLength > 0d)
+        {
+            targetTime = Math.Min(targetTime, clipLength - MinSeekTailSeconds);
+        }
+        targetTime = Math.Max(0d, targetTime);
+
+        bool wasPlaying = videoPlayer.isPlaying;
+        videoPlayer.time = targetTime;
+
+        if (!keepPlaybackState)
+        {
+            PauseVideo();
+        }
+        else if (!wasPlaying)
+        {
+            PauseVideo();
+        }
+    }
+
     void EndReached(VideoPlayer vp)
-{
-    if (videoPlayer == null) return;
-    PlayVideo();
-    videoPlayer.time = Mathf.Max(0f, (float)videoPlayer.length - skipFromEndSeconds);
-    PauseVideo();
-}
+    {
+        if (videoPlayer == null) return;
+        double? decisionTime = GetLastDecisionTime();
+        double target = decisionTime.HasValue
+            ? decisionTime.Value - skipFromEndSeconds
+            : (videoPlayer.length > 0d ? Math.Max(0d, videoPlayer.length - skipFromEndSeconds) : 0d);
+
+        SeekTo(target, keepPlaybackState: false);
+    }
     private void ShowAndHideButton(GameObject button)
     {
         StartCoroutine(ShowAndHideRoutine(button));
@@ -214,24 +310,13 @@ public class VideoController : MonoBehaviour
         if (button)
             button.SetActive(false);
     }
-    private IEnumerator VideoPauseWaitAFewSecs()
-    {
-        SetPlaybackSpeed(1);
-        yield return new WaitForSeconds(1.25f); // Adjust the duration as needed
-        if (videoPlayer != null && videoPlayer.isPrepared)
-        {
-            PauseVideo();
-            
-        }
-
-    }
-
     private void OnDestroy()
     {
         if (videoPlayer != null)
         {
             videoPlayer.loopPointReached -= EndReached;
         }
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
 }

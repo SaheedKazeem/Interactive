@@ -6,19 +6,43 @@ public class PauseMenuController : MonoBehaviour
     public GameObject menuCanvas;
     private VideoController videoController;
     private bool wasPlayingBeforeMenu;
+
+    private static PauseMenuController activeController;
+    private static int lastToggleFrame = -1;
     void Awake()
     {
-       SceneManager.sceneLoaded += OnSceneLoaded; 
+    }
+
+    private void OnEnable()
+    {
+        activeController = this;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        if (activeController == this)
+        {
+            activeController = null;
+        }
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
     {
-        
-        menuCanvas.SetActive(false); // Ensure the menu is initially not active
+        if (menuCanvas)
+        {
+            menuCanvas.SetActive(false); // Ensure the menu is initially not active
+        }
         
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (activeController == null)
+        {
+            activeController = this;
+        }
         videoController = Interactive.Util.SceneObjectFinder.FindFirst<VideoController>(true);
        
     }
@@ -26,19 +50,27 @@ public class PauseMenuController : MonoBehaviour
     {
         // Unsubscribe from the sceneLoaded event to prevent memory leaks
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (activeController == this)
+        {
+            activeController = null;
+        }
     }
 
     private void Update()
     {
-       
+        if (activeController != this) return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (lastToggleFrame == Time.frameCount) return;
+            lastToggleFrame = Time.frameCount;
             ToggleMenu();
         }
     }
 
     private void ToggleMenu()
     {
+        if (!menuCanvas) return;
+
         bool wasActive = menuCanvas.activeSelf;
         bool opening = !wasActive; // if currently inactive, we are opening
         menuCanvas.SetActive(!wasActive);

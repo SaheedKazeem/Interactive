@@ -8,50 +8,52 @@ public class SpeedSliderController : MonoBehaviour
     public VideoController videoController;
     public TextMeshProUGUI speedText, speedwarningText;
     private Slider slider;
+    private const float SliderSyncEpsilon = 0.01f;
 
     private void Start()
     {
         slider = GetComponent<Slider>();
-        slider.onValueChanged.AddListener(OnSliderValueChanged);
+        if (slider != null)
+        {
+            slider.onValueChanged.AddListener(OnSliderValueChanged);
+        }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
-        // Try to bind immediately if present in current scene
-        videoController = Interactive.Util.SceneObjectFinder.FindFirst<VideoController>(true);
-        if (videoController != null)
-        {
-            UpdateSpeedText(videoController.GetPlaybackSpeed());
-        }
+        BindVideoController();
     }
 
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (slider != null)
+            slider.onValueChanged.RemoveListener(OnSliderValueChanged);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        videoController = Interactive.Util.SceneObjectFinder.FindFirst<VideoController>(true);
-        if (videoController != null)
-        {
-            UpdateSpeedText(videoController.GetPlaybackSpeed());
-        }
+        BindVideoController();
     }
 
     void Update()
     {
-        if (videoController != null)
+        if (videoController == null || slider == null) return;
+
+        float current = videoController.GetPlaybackSpeed();
+        if (Mathf.Abs(slider.value - current) > SliderSyncEpsilon)
         {
-            UpdateSpeedText(videoController.GetPlaybackSpeed());
+            slider.SetValueWithoutNotify(current);
         }
+        UpdateSpeedText(current);
     }
 
     private void OnSliderValueChanged(float value)
     {
-        // Update the playback speed in the VideoController
+        if (videoController == null) return;
+
         videoController.SetPlaybackSpeed(value);
 
         // Check if the VideoController object has the "AHeavy" tag
-        if (videoController.gameObject.CompareTag("AHeavy"))
+        if (speedwarningText != null && videoController.gameObject.CompareTag("AHeavy"))
         {
             // Mute the audio for "AHeavy" objects with playback speed greater than 3.5
             if (value > 2)
@@ -72,6 +74,18 @@ public class SpeedSliderController : MonoBehaviour
 
     private void UpdateSpeedText(float value)
     {
-        speedText.text = "Playback Speed: " + value.ToString("F1") + "x";
+        if (speedText != null)
+            speedText.text = "Playback Speed: " + value.ToString("F1") + "x";
+    }
+
+    private void BindVideoController()
+    {
+        videoController = Interactive.Util.SceneObjectFinder.FindFirst<VideoController>(true);
+        if (videoController != null && slider != null)
+        {
+            float speed = videoController.GetPlaybackSpeed();
+            slider.SetValueWithoutNotify(speed);
+            UpdateSpeedText(speed);
+        }
     }
 }

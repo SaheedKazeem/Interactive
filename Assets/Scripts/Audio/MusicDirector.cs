@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using DG.Tweening;
+using Interactive.Util;
 
 namespace Interactive.Audio
 {
@@ -23,7 +25,7 @@ namespace Interactive.Audio
         private MusicProjectConfig config;
         private readonly List<ScheduledCue> scheduled = new List<ScheduledCue>();
         private VideoPlayer currentVideo;
-        [Header("Ducking")] public bool enableDucking = true;
+        [Header("Ducking")] public bool enableDucking = false;
         [Range(0f,1f)] public float duckTo = 0.6f; // target volume for video audio while music plays
         public float duckFade = 0.5f;
         private int activeMusicCount = 0; // number of currently audible music sources
@@ -31,11 +33,29 @@ namespace Interactive.Audio
         private bool isDucked = false;
         private bool hasOriginalVideoVolume = false;
 
-        // Global playlist mode
-        private bool playlistMode = false;
+        // Playlist overlay (for pause/fast-forward lobby music)
+        [Header("Playlist Overlay")] public bool enablePlaylistOverlay = true;
+        public bool overlayDuringPause = true;
+        public float fastForwardThreshold = 1.05f;
+        public float overlayPauseVolume = 0.12f;
+        public float overlayFastVolume = 0.35f;
+        public float overlayFade = 0.5f;
+
+        [Header("Scene Cue Mix")]
+        [Range(0f,1f)] public float sceneCueVolumeMultiplier = 0.5f;
+        [Range(0f,1f)] public float overlayVolumeMultiplier = 0.4f;
+
+        [Header("Automatic Scene Binding")]
+        public bool autoApplyOnSceneLoad = true;
+
         private List<MusicCue> playlist;
         private int playlistIndex = 0;
-        private AudioSource currentPlaylistSource;
+        private AudioSource playlistSrc;
+        private bool overlayActive = false;
+        private float overlayTarget = 0f;
+        private Coroutine playlistLoopCo;
+        private bool isAutoApplying;
+        private const float defaultStopFade = 0.75f;
 
         private class ScheduledCue
         {
@@ -62,7 +82,33 @@ namespace Interactive.Audio
             Instance = this;
             EnsureSources();
             LoadConfig();
-            // Per user request, default to per-scene cues only
+            if (autoApplyOnSceneLoad)
+            {
+                SceneManager.sceneLoaded += HandleSceneLoaded;
+                StartCoroutine(CoAutoApply(SceneManager.GetActiveScene().name));
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (Instance == this && autoApplyOnSceneLoad)
+                SceneManager.sceneLoaded -= HandleSceneLoaded;
+        }
+
+        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (!autoApplyOnSceneLoad) return;
+            StartCoroutine(CoAutoApply(scene.name));
+        }
+
+        private System.Collections.IEnumerator CoAutoApply(string sceneName)
+        {
+            yield return null; // wait a frame so finders can locate objects
+            isAutoApplying = true;
+            VideoPlayer vp = null;
+            try { vp = SceneObjectFinder.FindFirst<VideoPlayer>(true); } catch { }
+            ApplyForScene(sceneName, vp);
+            isAutoApplying = false;
         }
 
         private void EnsureSources()
@@ -78,6 +124,12 @@ namespace Interactive.Audio
                 srcB = gameObject.AddComponent<AudioSource>();
                 srcB.loop = true; srcB.playOnAwake = false; srcB.volume = 0f;
                 srcB.ignoreListenerPause = true; srcB.pitch = 1f;
+            }
+            if (playlistSrc == null)
+            {
+                playlistSrc = gameObject.AddComponent<AudioSource>();
+                playlistSrc.loop = false; playlistSrc.playOnAwake = false; playlistSrc.volume = 0f;
+                playlistSrc.ignoreListenerPause = true; playlistSrc.pitch = 1f;
             }
         }
 
@@ -103,19 +155,17 @@ namespace Interactive.Audio
 
         public void ApplyForScene(string sceneName, VideoPlayer video)
         {
-            // If using global playlist, ignore per-scene cues
-            if (playlistMode)
-            {
-                currentVideo = video; // still track for volume slider etc.
-                return;
-            }
             currentVideo = video;
             scheduled.Clear();
             KillTweens(srcA); KillTweens(srcB);
             activeMusicCount = 0;
 
             var sc = config?.scenes?.Find(s => string.Equals(s.name, sceneName, StringComparison.OrdinalIgnoreCase));
-            if (sc == null || sc.cues == null) return;
+            if (sc == null || sc.cues == null || sc.cues.Count == 0)
+            {
+                StopAllSceneSources(defaultStopFade);
+                return;
+            }
 
             foreach (var cue in sc.cues)
             {
@@ -130,14 +180,8 @@ namespace Interactive.Audio
 
         private void Update()
         {
-            if (playlistMode)
-            {
-                // Nothing to do per-frame: advancement handled by coroutine
-                // But if ducking was somehow left on and no audio is playing, ensure we unduck
-                if (enableDucking && isDucked && !IsAnySourceAudible())
-                    TryDuckVideo(false, duckFade);
-                return;
-            }
+            // Evaluate overlay (pause/fast-forward lobby music)
+            EvaluateOverlay();
 
             // If ducking is active but no music is audible anymore (e.g., non-loop clip ended), unduck
             if (enableDucking && isDucked && !IsAnySourceAudible())
@@ -181,7 +225,8 @@ namespace Interactive.Audio
 
             tgt.DOKill();
             float fadeInDur = Mathf.Max(0.05f, s.cue.fadeIn);
-            tgt.DOFade(Mathf.Clamp01(s.cue.volume), fadeInDur).SetUpdate(true);
+            float targetVolume = Mathf.Clamp01(s.cue.volume * sceneCueVolumeMultiplier);
+            tgt.DOFade(targetVolume, fadeInDur).SetUpdate(true);
 
             // If the other source is playing, fade it out
             var other = OtherSource(tgt);
@@ -192,7 +237,15 @@ namespace Interactive.Audio
 
             // Duck video audio while music is audible
             activeMusicCount++;
-            TryDuckVideo(true, fadeInDur);
+            if (!overlayActive)
+                TryDuckVideo(true, fadeInDur);
+
+            // If overlay is active (paused/fast-forward), keep scene music inaudible
+            if (overlayActive)
+            {
+                tgt.DOKill();
+                tgt.DOFade(0f, 0.1f).SetUpdate(true);
+            }
         }
 
         private void FadeOutAndStop(AudioSource src, float duration)
@@ -266,93 +319,185 @@ namespace Interactive.Audio
             return $"file:///{abs}";
         }
 
-        private void TryStartGlobalPlaylist()
+        private void EnsurePlaylistList()
         {
-            // Prefer explicit playlist field
+            if (playlist != null && playlist.Count > 0) return;
             if (config != null && config.playlist != null && config.playlist.Count > 0)
             {
-                playlistMode = true;
                 playlist = new List<MusicCue>(config.playlist);
             }
             else
             {
-                // Fallback: scene named _GLOBAL_ or _PLAYLIST_
                 var sc = config?.scenes?.Find(s => string.Equals(s.name, "_GLOBAL_", StringComparison.OrdinalIgnoreCase)
                                                  || string.Equals(s.name, "_PLAYLIST_", StringComparison.OrdinalIgnoreCase));
                 if (sc != null && sc.cues != null && sc.cues.Count > 0)
-                {
-                    playlistMode = true;
                     playlist = new List<MusicCue>(sc.cues);
+            }
+        }
+
+        private void EvaluateOverlay()
+        {
+            if (!enablePlaylistOverlay) return;
+            EnsurePlaylistList();
+            if (playlist == null || playlist.Count == 0) return;
+            if (currentVideo == null) return;
+
+            bool videoPlaying = false;
+            float speed = 1f;
+            try
+            {
+                videoPlaying = currentVideo.isPlaying;
+                speed = currentVideo.playbackSpeed;
+            }
+            catch { }
+
+            bool wantsPause = overlayDuringPause && (!videoPlaying || speed <= 0.01f);
+            bool wantsFast = speed > fastForwardThreshold;
+            bool shouldOverlay = wantsPause || wantsFast;
+            float targetVol = wantsFast ? overlayFastVolume : overlayPauseVolume;
+
+            if (shouldOverlay)
+            {
+                if (!overlayActive)
+                {
+                    StartOverlay(targetVol);
+                }
+                else if (Mathf.Abs(overlayTarget - targetVol) > 0.01f)
+                {
+                    overlayTarget = targetVol;
+                    FadeSourceTo(playlistSrc, overlayTarget * overlayVolumeMultiplier, overlayFade);
                 }
             }
+            else if (overlayActive)
+            {
+                StopOverlay();
+            }
+        }
 
-            if (!playlistMode || playlist == null || playlist.Count == 0)
-                return;
+        private void StartOverlay(float targetVol)
+        {
+            overlayActive = true;
+            overlayTarget = Mathf.Clamp01(targetVol);
 
-            // In playlist mode, don't duck video audio and don't schedule per-scene cues
-            enableDucking = false;
+            // Fade down scene sources without stopping, so they can resume after overlay
+            ForEachActiveSceneSource((src, cue) => FadeSourceTo(src, 0f, overlayFade));
+
+            // Ensure playlist loop coroutine is running
+            if (playlistLoopCo == null) playlistLoopCo = StartCoroutine(PlaylistLoop());
+            // Raise playlist volume
+            FadeSourceTo(playlistSrc, overlayTarget * overlayVolumeMultiplier, overlayFade);
+
+            // Ensure video is unducked while playlist overlay plays
+            TryDuckVideo(false, overlayFade);
+        }
+
+        private void StopOverlay()
+        {
+            overlayActive = false;
+            // Fade out playlist and pause
+            if (playlistSrc != null)
+            {
+                playlistSrc.DOKill();
+                playlistSrc.DOFade(0f, Mathf.Max(0.05f, overlayFade)).SetUpdate(true).OnComplete(() =>
+                {
+                    if (playlistSrc != null) playlistSrc.Pause();
+                });
+            }
+            // Restore scene sources to their configured volumes
+            ForEachActiveSceneSource((src, cue) => FadeSourceTo(src, Mathf.Clamp01(cue.volume * sceneCueVolumeMultiplier), overlayFade));
+
+            // Reapply duck if scene music is audible
+            if (enableDucking)
+            {
+                bool anySceneAudible = false;
+                foreach (var s in scheduled)
+                {
+                    if (s.started && !s.stopping && s.source != null && s.source.volume > 0.01f)
+                    {
+                        anySceneAudible = true; break;
+                    }
+                }
+                if (anySceneAudible) TryDuckVideo(true, overlayFade);
+            }
+        }
+
+        private void ForEachActiveSceneSource(Action<AudioSource, MusicCue> op)
+        {
+            if (scheduled == null) return;
+            foreach (var s in scheduled)
+            {
+                if (s.started && !s.stopping && s.source != null)
+                {
+                    op?.Invoke(s.source, s.cue);
+                }
+            }
+        }
+
+        private void FadeSourceTo(AudioSource src, float v, float dur)
+        {
+            if (src == null) return;
+            src.DOKill();
+            src.DOFade(Mathf.Clamp01(v), Mathf.Max(0.05f, dur)).SetUpdate(true);
+        }
+
+        private void StopAllSceneSources(float fade)
+        {
+            FadeOutAndStop(srcA, fade);
+            FadeOutAndStop(srcB, fade);
             scheduled.Clear();
-            playlistIndex = 0;
-            _ = StartCoroutine(StartPlaylistTrack(playlistIndex));
         }
 
-        private System.Collections.IEnumerator StartPlaylistTrack(int index)
+        private System.Collections.IEnumerator PlaylistLoop()
         {
-            if (playlist == null || playlist.Count == 0) yield break;
-            index = ((index % playlist.Count) + playlist.Count) % playlist.Count;
-            var cue = playlist[index];
-
-            var clipReq = new ClipRequest();
-            yield return StartCoroutine(LoadClipAsync(cue.file, clipReq));
-            var clip = clipReq.Result;
-            if (clip == null)
+            EnsurePlaylistList();
+            if (playlist == null || playlist.Count == 0) { playlistLoopCo = null; yield break; }
+            while (true)
             {
-                Debug.LogWarning($"MusicDirector: failed to load playlist clip '{cue.file}'");
-                // Try next track
-                playlistIndex = (index + 1) % playlist.Count;
-                _ = StartCoroutine(StartPlaylistTrack(playlistIndex));
-                yield break;
+                // Wait until overlay is active
+                while (!overlayActive) { yield return null; }
+
+                // If src playing, wait until it ends or overlay stops
+                if (playlistSrc != null && playlistSrc.isPlaying)
+                {
+                    yield return null; continue;
+                }
+
+                // Load next track
+                var cue = playlist[playlistIndex];
+                var req = new ClipRequest();
+                yield return StartCoroutine(LoadClipAsync(cue.file, req));
+                var clip = req.Result;
+                if (clip == null)
+                {
+                    // Skip to next
+                    playlistIndex = (playlistIndex + 1) % playlist.Count;
+                    continue;
+                }
+
+                if (playlistSrc == null) yield break;
+                playlistSrc.clip = clip;
+                playlistSrc.loop = false;
+                if (!overlayActive)
+                {
+                    // If overlay turned off during load, pause and continue
+                    playlistSrc.Pause();
+                    continue;
+                }
+                // Keep current volume (it is animated by overlay start/adjust)
+                if (!playlistSrc.isPlaying) playlistSrc.Play();
+
+                // Wait for end or overlay deactivation
+                double len = clip.length;
+                double start = Time.unscaledTimeAsDouble;
+                while (overlayActive && playlistSrc != null && playlistSrc.isPlaying)
+                {
+                    // If clip length is exceeded but still playing (streaming timing), break
+                    if (Time.unscaledTimeAsDouble - start > len + 0.5f) break;
+                    yield return null;
+                }
+                // Advance index
+                playlistIndex = (playlistIndex + 1) % playlist.Count;
             }
-
-            var tgt = NextSource();
-            tgt.clip = clip;
-            tgt.loop = false; // sequential playlist, no per-track looping
-            tgt.volume = 0f;
-            tgt.pitch = 1f;
-            tgt.Play();
-            currentPlaylistSource = tgt;
-
-            float fadeInDur = Mathf.Max(0.05f, cue.fadeIn);
-            float fadeOutDur = Mathf.Max(0.05f, cue.fadeOut);
-            float targetVol = Mathf.Clamp01(cue.volume);
-            tgt.DOKill();
-            tgt.DOFade(targetVol, fadeInDur).SetUpdate(true);
-
-            // Crossfade with the other source if playing
-            var other = OtherSource(tgt);
-            if (other != null && other.isPlaying)
-            {
-                FadeOutAndStop(other, fadeOutDur);
-            }
-
-            // Schedule next track near end for overlap
-            _ = StartCoroutine(CoAdvancePlaylistOnEnd(tgt, fadeOutDur));
-        }
-
-        private System.Collections.IEnumerator CoAdvancePlaylistOnEnd(AudioSource src, float fadeOutDur)
-        {
-            if (src == null || src.clip == null) yield break;
-            // Wait until near the end, using unscaled time
-            double clipLen = src.clip.length;
-            double start = Time.unscaledTimeAsDouble;
-            double endAt = start + Mathf.Max(0f, (float)(clipLen - fadeOutDur));
-            while (Time.unscaledTimeAsDouble < endAt && src != null && src.isPlaying)
-                yield return null;
-
-            // Advance to next
-            if (playlist == null || playlist.Count == 0) yield break;
-            playlistIndex = (playlistIndex + 1) % playlist.Count;
-            _ = StartCoroutine(StartPlaylistTrack(playlistIndex));
         }
 
         private void TryDuckVideo(bool duck, float duration)

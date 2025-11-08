@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using System;
+using Interactive.Util;
 
 public class VideoVolumeSlider : MonoBehaviour
 {
@@ -11,46 +12,47 @@ public class VideoVolumeSlider : MonoBehaviour
 
     private void Start()
     {
-        // Load the volume setting from PlayerPrefs
         float savedVolume = PlayerPrefs.GetFloat("VideoVolume", 1.0f);
-        volumeSlider.value = savedVolume;
+        if (volumeSlider != null)
+        {
+            volumeSlider.SetValueWithoutNotify(savedVolume);
+            volumeSlider.onValueChanged.AddListener(ChangeVideoVolume);
+        }
 
-        // Add a listener to the slider's value change event
-        volumeSlider.onValueChanged.AddListener(ChangeVideoVolume);
-
-        // Subscribe to the sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
+        ApplySavedVolumeToCurrentScene();
     }
 
     private void OnDestroy()
     {
-        // Unsubscribe from the sceneLoaded event to prevent memory leaks
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (volumeSlider != null)
+            volumeSlider.onValueChanged.RemoveListener(ChangeVideoVolume);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Find the VideoPlayer component
-        videoPlayer = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
+        ApplySavedVolumeToCurrentScene();
+    }
 
-        // Set the video player's volume based on the saved volume
+    private void ChangeVideoVolume(float volume)
+    {
+        if (videoPlayer == null)
+            videoPlayer = SceneObjectFinder.FindFirst<VideoPlayer>(true);
+        if (videoPlayer != null)
+            videoPlayer.SetDirectAudioVolume(0, volume);
+
+        PlayerPrefs.SetFloat("VideoVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+    private void ApplySavedVolumeToCurrentScene()
+    {
+        videoPlayer = SceneObjectFinder.FindFirst<VideoPlayer>(true);
         if (videoPlayer != null)
         {
             float savedVolume = PlayerPrefs.GetFloat("VideoVolume", 1.0f);
             videoPlayer.SetDirectAudioVolume(0, savedVolume);
         }
-    }
-
-    private void ChangeVideoVolume(float volume)
-    {
-        // Set the video player's volume based on the slider value
-        if (videoPlayer != null)
-        {
-            videoPlayer.SetDirectAudioVolume(0, volume);
-        }
-
-        // Update the volume setting in PlayerPrefs
-        PlayerPrefs.SetFloat("VideoVolume", volume);
-        PlayerPrefs.Save();
     }
 }
