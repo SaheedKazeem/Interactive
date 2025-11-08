@@ -20,7 +20,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 180,
+                    "timeBonusPoints": 60,
+                    "timeBonusWindow": 5.0,
+                    "badgeId": "bfm_first_dive",
+                    "badgeDescription": "Plunge deeper into Bona Fide Masochist.",
+                    "branchTag": "Masochist",
+                    "countsAsEnding": false
                 }
             ]
         },
@@ -43,7 +50,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 160,
+                    "timeBonusPoints": 80,
+                    "timeBonusWindow": 4.0,
+                    "badgeId": "faulty_surge",
+                    "badgeDescription": "Rewired grit during Faulty Wiring.",
+                    "branchTag": "Voltage",
+                    "countsAsEnding": false
                 }
             ]
         },
@@ -66,7 +80,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 140,
+                    "timeBonusPoints": 50,
+                    "timeBonusWindow": 3.5,
+                    "badgeId": "fear_scout",
+                    "badgeDescription": "Sniffed out the earliest fear cue.",
+                    "branchTag": "Scent",
+                    "countsAsEnding": false
                 }
             ]
         },
@@ -295,7 +316,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 175,
+                    "timeBonusPoints": 65,
+                    "timeBonusWindow": 4.0,
+                    "badgeId": "crying_listen",
+                    "badgeDescription": "Listened to the crying man.",
+                    "branchTag": "Empathy",
+                    "countsAsEnding": false
                 },
                 {
                     "name": "Button (3)",
@@ -312,7 +340,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 90,
+                    "timeBonusPoints": 45,
+                    "timeBonusWindow": 2.8,
+                    "badgeId": "crying_flee",
+                    "badgeDescription": "Turned away from the crying man.",
+                    "branchTag": "Escape",
+                    "countsAsEnding": false
                 }
             ]
         },
@@ -335,7 +370,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 150,
+                    "timeBonusPoints": 55,
+                    "timeBonusWindow": 3.2,
+                    "badgeId": "eyes_hesitation",
+                    "badgeDescription": "Held the stare a little longer.",
+                    "branchTag": "Observation",
+                    "countsAsEnding": false
                 },
                 {
                     "name": "Button (4)",
@@ -352,7 +394,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 210,
+                    "timeBonusPoints": 70,
+                    "timeBonusWindow": 2.0,
+                    "badgeId": "eyes_bold",
+                    "badgeDescription": "Met the stare head-on.",
+                    "branchTag": "Confrontation",
+                    "countsAsEnding": false
                 }
             ]
         },
@@ -627,7 +676,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 260,
+                    "timeBonusPoints": 120,
+                    "timeBonusWindow": 6.5,
+                    "badgeId": "ending_leave",
+                    "badgeDescription": "Chose to leave the faceless residence.",
+                    "branchTag": "Departure",
+                    "countsAsEnding": true
                 }
             ]
         },
@@ -713,7 +769,7 @@
         },
         {
             "name": "New Convo",
-            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/NEW CONVERSATION_.mp4",
+            "windowsLocalPath": "C:/Users/tboya/Documents/GitHub/Interactive/Assets/Videos/FMP/FMP/NEW CONVERSATION.mp4",
             "buttons": [
                 {
                     "name": "Button (3)",
@@ -976,7 +1032,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 120,
+                    "timeBonusPoints": 40,
+                    "timeBonusWindow": 3.0,
+                    "badgeId": "door_patience",
+                    "badgeDescription": "Listened before leaping through a random door.",
+                    "branchTag": "Poise",
+                    "countsAsEnding": false
                 },
                 {
                     "name": "Button (3)",
@@ -993,7 +1056,14 @@
                     "fadeIn": 0.3499999940395355,
                     "scaleFrom": 0.949999988079071,
                     "pulse": false,
-                    "autoSelectAfter": -1.0
+                    "autoSelectAfter": -1.0,
+                    "rewardPoints": 200,
+                    "timeBonusPoints": 90,
+                    "timeBonusWindow": 2.5,
+                    "badgeId": "door_impulse",
+                    "badgeDescription": "Jumped immediately at the random door.",
+                    "branchTag": "Impulse",
+                    "countsAsEnding": false
                 }
             ]
         },

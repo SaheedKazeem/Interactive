@@ -135,22 +135,7 @@ namespace Interactive.Audio
 
         private void LoadConfig()
         {
-            try
-            {
-                string file = Path.Combine(Application.persistentDataPath, "music.json");
-                if (!File.Exists(file)) file = Path.Combine(Application.streamingAssetsPath, "music.json");
-                if (File.Exists(file))
-                {
-                    config = JsonUtility.FromJson<MusicProjectConfig>(File.ReadAllText(file));
-                    Debug.Log($"MusicDirector loaded config: {file}");
-                }
-                else config = new MusicProjectConfig();
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"MusicDirector failed to load config: {e.Message}");
-                config = new MusicProjectConfig();
-            }
+            config = MusicConfigProvider.Load();
         }
 
         public void ApplyForScene(string sceneName, VideoPlayer video)

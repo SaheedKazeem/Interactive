@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Video;
  
 public class TheEndScript : MonoBehaviour
@@ -17,8 +16,8 @@ public class TheEndScript : MonoBehaviour
     }
  
  
-     void CheckOver(UnityEngine.Video.VideoPlayer vp)
+    void CheckOver(UnityEngine.Video.VideoPlayer vp)
     {
-        SceneManager.LoadScene(1);//the scene that you want to load after the video has ended.
+        SceneFader.FadeAndLoad(1);//the scene that you want to load after the video has ended.
     }
 }

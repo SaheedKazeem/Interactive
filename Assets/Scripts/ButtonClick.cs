@@ -29,117 +29,117 @@ public class ButtonClick : MonoBehaviour
     }
     public void NextVideo()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneFader.FadeAndLoad(SceneManager.GetActiveScene().buildIndex + 1);
     }
      public void GoBackVideo()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneFader.FadeAndLoad(SceneManager.GetActiveScene().buildIndex - 1);
     }
      public void RandomDoors()
     {
-        SceneManager.LoadScene(("Random Door"));
+        SceneFader.FadeAndLoad(("Random Door"));
     }
      public void ReturnHome()
     {
-        SceneManager.LoadScene(("Home"));
+        SceneFader.FadeAndLoad(("Home"));
     }
     public void ReturnBackToPawel()
     {
-        SceneManager.LoadScene(("Pawel's Door"));
+        SceneFader.FadeAndLoad(("Pawel's Door"));
     }
     public void PlayTheBFM()
     {
-        SceneManager.LoadScene(("Play BFM"));
+        SceneFader.FadeAndLoad(("Play BFM"));
         
     }
       public void PlayXTC()
     {
-        SceneManager.LoadScene(("Play XTC"));
+        SceneFader.FadeAndLoad(("Play XTC"));
         
     }
       public void LookXTC()
     {
-        SceneManager.LoadScene(("Look at X-TC Disc"));
+        SceneFader.FadeAndLoad(("Look at X-TC Disc"));
         
     }
     public void TapOut()
     {
-        SceneManager.LoadScene(("Tap Out"));
+        SceneFader.FadeAndLoad(("Tap Out"));
         
     }
     public void PostMortem()
     {
-        SceneManager.LoadScene(("#Fear Smells"));
+        SceneFader.FadeAndLoad(("#Fear Smells"));
         
     }
     public void BeamUp()
     {
-        SceneManager.LoadScene(("Beam me Up!"));
+        SceneFader.FadeAndLoad(("Beam me Up!"));
         
     }
     public void SmokeUp()
     {
-        SceneManager.LoadScene(("Smoke"));
+        SceneFader.FadeAndLoad(("Smoke"));
         
     }
      public void BusSpot()
     {
-        SceneManager.LoadScene(("Bus"));
+        SceneFader.FadeAndLoad(("Bus"));
         
     }
     public void StandUp()
     {
-        SceneManager.LoadScene(("Stand Up"));
+        SceneFader.FadeAndLoad(("Stand Up"));
         
     }
      public void FGod()
     {
-        SceneManager.LoadScene(("Fucking God"));
+        SceneFader.FadeAndLoad(("Fucking God"));
         
     }
      public void Eyes()
     {
-        SceneManager.LoadScene(("Eyes"));
+        SceneFader.FadeAndLoad(("Eyes"));
         
     }
     public void Scent()
     {
-        SceneManager.LoadScene(("Scent"));
+        SceneFader.FadeAndLoad(("Scent"));
         
     }
     public void NewConvo()
     {
-        SceneManager.LoadScene(("New Convo"));
+        SceneFader.FadeAndLoad(("New Convo"));
         
     }
     public void Leave()
     {
-        SceneManager.LoadScene(("Leave"));
+        SceneFader.FadeAndLoad(("Leave"));
 
     }
     public void TodayIsDay()
     {
-        SceneManager.LoadScene(("Today is the Day"));
+        SceneFader.FadeAndLoad(("Today is the Day"));
 
     }
     public void WDYM()
     {
-        SceneManager.LoadScene(("WDYM"));
+        SceneFader.FadeAndLoad(("WDYM"));
 
     }
      public void TakeOffVeil()
     {
-        SceneManager.LoadScene(("Take Off Veil"));
+        SceneFader.FadeAndLoad(("Take Off Veil"));
 
     }
        public void Name()
     {
-        SceneManager.LoadScene(("Name"));
+        SceneFader.FadeAndLoad(("Name"));
 
     }
     public void ReturnToTrainStation()
     {
-        SceneManager.LoadScene(("Train Station"));
+        SceneFader.FadeAndLoad(("Train Station"));
     }
 
 

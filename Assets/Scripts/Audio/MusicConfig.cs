@@ -9,6 +9,8 @@ namespace Interactive.Audio
         public List<SceneMusicConfig> scenes = new List<SceneMusicConfig>();
         // Optional global playlist that plays across all scenes
         public List<MusicCue> playlist = new List<MusicCue>();
+        // Short snippets/samples that can double as UI SFX
+        public List<MusicSnippet> snippets = new List<MusicSnippet>();
     }
 
     [Serializable]
@@ -29,5 +31,16 @@ namespace Interactive.Audio
         public float fadeIn = 0.75f;
         public float fadeOut = 0.75f;
         public bool loop = true;
+    }
+
+    [Serializable]
+    public class MusicSnippet
+    {
+        public string name;
+        public string file;
+        public float start = 0f;
+        public float duration = 0.35f;
+        public float volume = 0.9f;
+        public float pitch = 1f;
     }
 }

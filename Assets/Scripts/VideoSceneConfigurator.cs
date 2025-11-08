@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using Interactive.Config;
+using Interactive.Gamification;
 using DG.Tweening;
 
 /// <summary>
@@ -22,7 +23,9 @@ public class VideoSceneConfigurator : MonoBehaviour
 
     private SceneConfig sceneConfig;
     private readonly Dictionary<string, TimedButtonState> buttonStates = new Dictionary<string, TimedButtonState>();
+    private readonly HashSet<int> instrumentedButtons = new HashSet<int>();
     private bool setupButtons;
+    private const float HotkeyGroupingPrecision = 10f; // 0.1 second buckets for decision groupings
 
     private class TimedButtonState
     {
@@ -121,6 +124,8 @@ public class VideoSceneConfigurator : MonoBehaviour
         if (sceneConfig.buttons == null || sceneConfig.buttons.Count == 0)
             return;
 
+        ApplyDefaultDecisionHotkeys();
+
         foreach (var cfg in sceneConfig.buttons)
         {
             // Dynamic spawn path
@@ -145,7 +150,10 @@ public class VideoSceneConfigurator : MonoBehaviour
                 var go = buttonObj.gameObject;
                 var btn = buttonObj.GetComponent<Button>();
                 PrepareButtonForShow(go, btn);
-                WireButtonAction(btn, cfg.targetScene);
+                if (!string.IsNullOrEmpty(cfg.targetScene))
+                    WireButtonAction(btn, cfg);
+                else
+                    EnsureChoiceTelemetry(btn, cfg);
 
                 buttonStates[go.name] = new TimedButtonState
                 {
@@ -175,7 +183,10 @@ public class VideoSceneConfigurator : MonoBehaviour
                 }
                 if (manageExistingButtons)
                     PrepareButtonForShow(go, btn);
-                WireButtonAction(btn, cfg.targetScene);
+                if (!string.IsNullOrEmpty(cfg.targetScene))
+                    WireButtonAction(btn, cfg);
+                else
+                    EnsureChoiceTelemetry(btn, cfg);
 
                 buttonStates[cfg.name] = new TimedButtonState
                 {
@@ -192,19 +203,22 @@ public class VideoSceneConfigurator : MonoBehaviour
         setupButtons = true;
     }
 
-    private static void WireButtonAction(Button btn, string target)
+    private void WireButtonAction(Button btn, TimedButtonConfig cfg)
     {
-        // If target is empty, respect existing listeners set up in the scene.
-        if (string.IsNullOrEmpty(target)) return;
+        if (btn == null || cfg == null) return;
+        if (string.IsNullOrEmpty(cfg.targetScene))
+        {
+            EnsureChoiceTelemetry(btn, cfg);
+            return;
+        }
 
-        // Otherwise, we own the click and navigate to the configured scene.
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(() =>
         {
+            GamificationManager.Instance?.HandleChoiceSelected(sceneConfig?.name ?? SceneManager.GetActiveScene().name, cfg);
             var bars = Interactive.Util.SceneObjectFinder.FindFirst<CinematicBars>(true);
             if (bars != null) bars.Hide();
-            // Fade out then load for polish
-            SceneFader.FadeAndLoad(target, 0.35f);
+            SceneFader.FadeAndLoad(cfg.targetScene);
         });
     }
 
@@ -266,6 +280,7 @@ public class VideoSceneConfigurator : MonoBehaviour
                 }
                 state.shown = true;
                 state.shownAt = (float)t;
+                NotifyGamificationDecision(state.cfg);
                 if (state.cfg.autoSelectAfter > 0f && !state.autoScheduled)
                 {
                     state.autoScheduled = true;
@@ -304,6 +319,50 @@ public class VideoSceneConfigurator : MonoBehaviour
         }
     }
 
+    private void ApplyDefaultDecisionHotkeys()
+    {
+        if (sceneConfig == null || sceneConfig.buttons == null) return;
+
+        var grouped = new Dictionary<int, List<TimedButtonConfig>>();
+        foreach (var cfg in sceneConfig.buttons)
+        {
+            if (cfg == null || !string.IsNullOrWhiteSpace(cfg.hotkey)) continue;
+            int bucket = Mathf.RoundToInt(cfg.appearTime * HotkeyGroupingPrecision);
+            if (!grouped.TryGetValue(bucket, out var list))
+            {
+                list = new List<TimedButtonConfig>();
+                grouped[bucket] = list;
+            }
+            list.Add(cfg);
+        }
+
+        foreach (var entry in grouped.Values)
+        {
+            entry.Sort((a, b) => a.appearTime.CompareTo(b.appearTime));
+            var defaults = ResolveDefaultHotkeys(entry.Count);
+            if (defaults == null) continue;
+            for (int i = 0; i < entry.Count && i < defaults.Length; i++)
+            {
+                entry[i].hotkey = defaults[i];
+            }
+        }
+    }
+
+    private static string[] ResolveDefaultHotkeys(int optionCount)
+    {
+        switch (optionCount)
+        {
+            case 1:
+                return new[] { "Space" };
+            case 2:
+                return new[] { "LeftShift", "RightShift" };
+            case 3:
+                return new[] { "LeftShift", "RightShift", "Return" };
+            default:
+                return null;
+        }
+    }
+
     private void TryTriggerBarsAndSfxOnce()
     {
         var projectConfig = VideoSceneConfigLoader.Load();
@@ -314,9 +373,16 @@ public class VideoSceneConfigurator : MonoBehaviour
             bars.Configure(projectConfig.barHeightPct, projectConfig.barTween);
             bars.Show();
         }
-        if (projectConfig != null && !string.IsNullOrEmpty(projectConfig.decisionSfxFile))
+        if (projectConfig != null)
         {
-            Interactive.Audio.SfxPlayer.Ensure().PlayOneShot(projectConfig.decisionSfxFile, projectConfig.decisionSfxVolume);
+            if (!string.IsNullOrEmpty(projectConfig.decisionSfxSnippet))
+            {
+                Interactive.Audio.SfxPlayer.Ensure().PlaySnippet(projectConfig.decisionSfxSnippet);
+            }
+            else if (!string.IsNullOrEmpty(projectConfig.decisionSfxFile))
+            {
+                Interactive.Audio.SfxPlayer.Ensure().PlayOneShot(projectConfig.decisionSfxFile, projectConfig.decisionSfxVolume);
+            }
         }
     }
 
@@ -357,6 +423,23 @@ public class VideoSceneConfigurator : MonoBehaviour
             if (c >= '0' && c <= '9') { key = KeyCode.Alpha0 + (c - '0'); return true; }
         }
         return false;
+    }
+
+    private void EnsureChoiceTelemetry(Button btn, TimedButtonConfig cfg)
+    {
+        if (btn == null || cfg == null) return;
+        int id = btn.GetInstanceID();
+        if (!instrumentedButtons.Add(id)) return;
+        btn.onClick.AddListener(() =>
+        {
+            GamificationManager.Instance?.HandleChoiceSelected(sceneConfig?.name ?? SceneManager.GetActiveScene().name, cfg);
+        });
+    }
+
+    private void NotifyGamificationDecision(TimedButtonConfig cfg)
+    {
+        if (cfg == null) return;
+        GamificationManager.Instance?.NotifyDecisionShown(sceneConfig?.name ?? SceneManager.GetActiveScene().name, cfg);
     }
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN

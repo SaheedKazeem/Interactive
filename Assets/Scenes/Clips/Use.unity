@@ -338,7 +338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1678, y: 101}
+  m_AnchoredPosition: {x: -1415, y: 101}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307092806
@@ -1247,7 +1247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -596, y: 98}
+  m_AnchoredPosition: {x: -341, y: 98}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597169073
@@ -1451,6 +1451,19 @@ MonoBehaviour:
   speedMultiplier: 2
   seekSeconds: 5
   skipFromEndSeconds: 4.25
+  decisionSnapEpsilon: 0.2
+  minPlaybackSpeed: 0.5
+  defaultMaxPlaybackSpeed: 3.5
+  shortClipSeconds: 60
+  mediumClipSeconds: 150
+  longClipSeconds: 300
+  extraLongClipSeconds: 480
+  shortClipMaxSpeed: 1.5
+  mediumClipMaxSpeed: 2.25
+  longClipMaxSpeed: 3
+  extraLongClipMaxSpeed: 3.5
+  marathonClipMaxSpeed: 4
+  muteSpeedThreshold: 1.05
 --- !u!114 &1711525241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1500,6 +1513,7 @@ MonoBehaviour:
   resolver: {fileID: 0}
   dynamicContainer: {fileID: 0}
   dynamicButtonPrefab: {fileID: 0}
+  manageExistingButtons: 0
 --- !u!4 &1764404988
 Transform:
   m_ObjectHideFlags: 0

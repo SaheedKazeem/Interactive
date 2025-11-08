@@ -16,19 +16,38 @@ public class VideoController : MonoBehaviour
     public bool hasFBeenPressed;
 
     [SerializeField] private bool isPlaying = false;
-    private float defaultPlaybackSpeed;
+    private float defaultPlaybackSpeed = 1f;
+    [Header("Speed Settings")]
     [SerializeField] private float speedMultiplier = 2.0f; // Multiplier for SpeedUp
     [SerializeField] private float seekSeconds = 5.0f;       // Q/E seek amount
     [SerializeField] private float skipFromEndSeconds = 4.25f; // Lead-in before decision when pausing
     [SerializeField] private float decisionSnapEpsilon = 0.2f; // Seconds past a decision before we skip to the next
+    [SerializeField] private float minPlaybackSpeed = 0.5f;
+    [SerializeField] private float defaultMaxPlaybackSpeed = 3.5f;
+    [SerializeField] private float shortClipSeconds = 60f;
+    [SerializeField] private float mediumClipSeconds = 150f;
+    [SerializeField] private float longClipSeconds = 300f;
+    [SerializeField] private float extraLongClipSeconds = 480f;
+    [SerializeField] private float shortClipMaxSpeed = 1.5f;
+    [SerializeField] private float mediumClipMaxSpeed = 2.25f;
+    [SerializeField] private float longClipMaxSpeed = 3f;
+    [SerializeField] private float extraLongClipMaxSpeed = 3.5f;
+    [SerializeField] private float marathonClipMaxSpeed = 4f;
+    [SerializeField] private float muteSpeedThreshold = 1.05f;
 
     private readonly List<float> decisionTimes = new List<float>();
     private string cachedSceneName;
     private const double MinSeekTailSeconds = 0.05d;
+    private const string PlaybackSpeedPrefKey = "PlaybackSpeed";
+
+    private float requestedPlaybackSpeed = 1f;
+    private bool audioMutedForSpeed;
 
 
     private void Start()
     {
+        requestedPlaybackSpeed = PlayerPrefs.GetFloat(PlaybackSpeedPrefKey, 1f);
+
         if (videoPlayer == null)
         {
             videoPlayer = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
@@ -36,10 +55,17 @@ public class VideoController : MonoBehaviour
 
         if (videoPlayer != null)
         {
-            defaultPlaybackSpeed = videoPlayer.playbackSpeed;
+            defaultPlaybackSpeed = Mathf.Max(0.1f, videoPlayer.playbackSpeed);
+            if (!PlayerPrefs.HasKey(PlaybackSpeedPrefKey))
+            {
+                requestedPlaybackSpeed = defaultPlaybackSpeed;
+            }
             // Ensure we don't double-subscribe
             videoPlayer.loopPointReached -= EndReached;
             videoPlayer.loopPointReached += EndReached;
+            videoPlayer.prepareCompleted -= OnVideoPrepared;
+            videoPlayer.prepareCompleted += OnVideoPrepared;
+            ApplyRequestedPlaybackSpeed();
         }
 
         // Try to resolve UI references if not wired in Inspector
@@ -58,13 +84,15 @@ public class VideoController : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
-        if (videoPlayer == null)
+        videoPlayer = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
+        if (videoPlayer != null)
         {
-            videoPlayer = Interactive.Util.SceneObjectFinder.FindFirst<VideoPlayer>(true);
-        }
-        else
-        {
+            defaultPlaybackSpeed = Mathf.Max(0.1f, videoPlayer.playbackSpeed);
+            videoPlayer.loopPointReached -= EndReached;
+            videoPlayer.loopPointReached += EndReached;
+            videoPlayer.prepareCompleted -= OnVideoPrepared;
+            videoPlayer.prepareCompleted += OnVideoPrepared;
+            ApplyRequestedPlaybackSpeed();
             PlayVideo();
         }
         RefreshDecisionTimes(scene.name);
@@ -133,10 +161,7 @@ public class VideoController : MonoBehaviour
 
     public void SpeedUp()
     {
-        if (videoPlayer != null)
-        {
-            videoPlayer.playbackSpeed = Mathf.Clamp(videoPlayer.playbackSpeed * speedMultiplier, 0.1f, 4f);
-        }
+        SetPlaybackSpeed(GetPlaybackSpeed() * speedMultiplier);
     }
 
     public bool IsVideoPlaying()
@@ -147,17 +172,16 @@ public class VideoController : MonoBehaviour
     // Method to get the current playback speed
     public float GetPlaybackSpeed()
     {
-        return videoPlayer != null ? videoPlayer.playbackSpeed : 1f;
+        if (videoPlayer != null)
+            return videoPlayer.playbackSpeed;
+        return requestedPlaybackSpeed;
     }
 
     // Method to set the playback speed
     public void SetPlaybackSpeed(float speed)
     {
-        if (videoPlayer != null)
-        {
-            videoPlayer.playbackSpeed = Mathf.Clamp(speed, 0.1f, 4f);
-        }
-
+        requestedPlaybackSpeed = speed;
+        ApplyRequestedPlaybackSpeed();
     }
     public void SetAudioVolume(float volume)
     {
@@ -171,13 +195,87 @@ public class VideoController : MonoBehaviour
         float savedVolume = PlayerPrefs.GetFloat("VideoVolume", 1.0f);
         if (videoPlayer != null)
         {
-            videoPlayer.SetDirectAudioVolume(0, Mathf.Clamp01(savedVolume));
+            float target = audioMutedForSpeed ? 0f : Mathf.Clamp01(savedVolume);
+            videoPlayer.SetDirectAudioVolume(0, target);
         }
     }
 
     public void SetSeekSeconds(float seconds)
     {
         seekSeconds = Mathf.Max(0.1f, seconds);
+    }
+
+    public void GetPlaybackSpeedRange(out float min, out float max)
+    {
+        CalculateSpeedClamp(out min, out max);
+    }
+
+    public float GetAudioMuteThreshold() => muteSpeedThreshold;
+
+    public void RefreshAudioPolicy()
+    {
+        ApplyAudioPolicy(GetPlaybackSpeed());
+    }
+
+    private void ApplyRequestedPlaybackSpeed()
+    {
+        CalculateSpeedClamp(out float min, out float max);
+        float clamped = Mathf.Clamp(requestedPlaybackSpeed, min, max);
+        requestedPlaybackSpeed = clamped;
+
+        if (videoPlayer != null)
+        {
+            videoPlayer.playbackSpeed = clamped;
+        }
+
+        PlayerPrefs.SetFloat(PlaybackSpeedPrefKey, clamped);
+        PlayerPrefs.Save();
+        ApplyAudioPolicy(clamped);
+    }
+
+    private void CalculateSpeedClamp(out float min, out float max)
+    {
+        min = Mathf.Max(0.1f, minPlaybackSpeed);
+        max = defaultMaxPlaybackSpeed;
+        double clipLength = GetClipLengthSeconds();
+        if (clipLength > 0d)
+        {
+            if (clipLength <= shortClipSeconds) max = shortClipMaxSpeed;
+            else if (clipLength <= mediumClipSeconds) max = mediumClipMaxSpeed;
+            else if (clipLength <= longClipSeconds) max = longClipMaxSpeed;
+            else if (clipLength <= extraLongClipSeconds) max = extraLongClipMaxSpeed;
+            else max = marathonClipMaxSpeed;
+        }
+        if (max < min + 0.05f) max = min + 0.05f;
+    }
+
+    private double GetClipLengthSeconds()
+    {
+        if (videoPlayer == null) return 0d;
+        try { return videoPlayer.length; }
+        catch { return 0d; }
+    }
+
+    private void ApplyAudioPolicy(float speed)
+    {
+        if (videoPlayer == null) return;
+
+        if (speed >= muteSpeedThreshold)
+        {
+            videoPlayer.SetDirectAudioVolume(0, 0f);
+            audioMutedForSpeed = true;
+        }
+        else
+        {
+            audioMutedForSpeed = false;
+            float savedVolume = PlayerPrefs.GetFloat("VideoVolume", 1.0f);
+            videoPlayer.SetDirectAudioVolume(0, Mathf.Clamp01(savedVolume));
+        }
+    }
+
+    private void OnVideoPrepared(VideoPlayer source)
+    {
+        ApplyRequestedPlaybackSpeed();
     }
 
     private void SkipToNextDecision()
@@ -315,6 +413,7 @@ public class VideoController : MonoBehaviour
         if (videoPlayer != null)
         {
             videoPlayer.loopPointReached -= EndReached;
+            videoPlayer.prepareCompleted -= OnVideoPrepared;
         }
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }

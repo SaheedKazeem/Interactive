@@ -12,6 +12,7 @@ namespace Interactive.Config
         // Global UI/audio polish
         public string decisionSfxFile; // optional: play when a decision becomes available
         public float decisionSfxVolume = 0.8f;
+        public string decisionSfxSnippet; // optional: reuse a snippet defined in music.json
         public bool enableBars = true; // cinematic bars when choices appear
         public float barHeightPct = 0.08f; // top/bottom height percentage of screen
         public float barTween = 0.35f; // seconds
@@ -47,5 +48,14 @@ namespace Interactive.Config
 
         // Auto-select if not pressed after N seconds from appearance (<=0 disabled)
         public float autoSelectAfter = -1f;
+
+        // Gamification metadata
+        public int rewardPoints = 0;        // Base points granted when this choice is made
+        public int timeBonusPoints = 0;     // Extra points for reacting before timeBonusWindow
+        public float timeBonusWindow = 0f;  // Real-time seconds to earn the bonus (<=0 uses default)
+        public string badgeId;              // Optional badge id unlocked when chosen
+        public string badgeDescription;     // Friendly text for the badge
+        public string branchTag;            // Optional string to group choices (hope, despair, etc.)
+        public bool countsAsEnding = false; // Flag to treat the choice as an ending discovery
     }
 }
